@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#152721">
+<meta name="description" content="PhotoTrace：离线管理摄影项目、人物任务与真实成果。">
+<title>PhotoTrace · 摄影工作台</title>
+<style>
+:root{color-scheme:light;--paper:#f6f7f3;--surface:#fff;--ink:#20362d;--muted:#687a70;--line:#dfe6de;--accent:#237455;--accent-soft:#e4f1e8;--danger:#a33f34;--amber:#967227;--shadow:0 12px 36px #1d352a10;--ease:cubic-bezier(.16,1,.3,1);--layout-ease:cubic-bezier(.2,0,0,1);--open:360ms;--close:320ms;--move:240ms}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.55 "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button,input,select,textarea{border:1px solid var(--line);border-radius:9px}button{padding:8px 13px;background:var(--surface);color:var(--ink);transition:background .15s,box-shadow .15s,transform .15s}button:hover{background:#f0f5ee}button:active{transform:translateY(1px)}button:disabled{cursor:not-allowed;opacity:.45}button.primary{background:var(--accent);border-color:var(--accent);color:#fff}button.primary:hover{background:#1a6346}button.danger{color:var(--danger)}button.quiet{background:transparent;border-color:transparent}input,select,textarea{padding:9px 11px;background:#fff;color:var(--ink);width:100%;min-width:0}input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent);flex-shrink:0}textarea{resize:vertical;min-height:80px}input:focus,textarea:focus,select:focus{outline:2px solid #23745555;outline-offset:1px}button:focus-visible,summary:focus-visible,.card:focus-visible{outline:3px solid #23745580;outline-offset:3px}h1,h2,h3,p{margin:0}h2{font-size:19px}h3{font-size:15px}small,.muted{color:var(--muted)}[hidden]{display:none!important}.mono{font-variant-numeric:tabular-nums}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:600;color:var(--muted)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 28px;border-bottom:1px solid var(--line);background:#ffffffd9}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:39px;height:39px;background:var(--ink);color:#fff;border-radius:12px;display:grid;place-items:center}.brand h1{font-size:22px;font-weight:650;letter-spacing:-.6px}.brand p{font-size:11px;letter-spacing:1px}.actions,.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.save-status{font-size:12px;color:var(--muted);margin-right:10px}.save-status.bad{color:var(--danger)}.workspace{padding:28px;max-width:1800px;margin:auto}.intro{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:22px}.intro h2{font-size:29px;font-weight:600;letter-spacing:-.7px;margin:5px 0}.intro p{color:var(--muted);font-size:13px}.metrics{display:flex;gap:30px}.metric span{display:block;font-size:11px;color:var(--muted)}.metric strong{font-size:26px;font-weight:550}.tabs{display:flex;gap:20px;border-bottom:1px solid var(--line);margin-bottom:18px}.tabs button{border:0;border-radius:0;padding:10px 1px;color:var(--muted);background:transparent;border-bottom:2px solid transparent}.tabs button[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent);font-weight:650}.tabs .tab-count{font-size:11px;border-radius:5px;background:#e7ece5;padding:2px 5px;margin-left:6px}.filters{display:grid;grid-template-columns:minmax(200px,1fr) 130px 145px 150px 150px auto;gap:9px;align-items:center;margin-bottom:21px}.filters input,.filters select{background:#ffffffd9;font-size:12px}.notice{padding:12px 15px;border:1px solid #e1c58b;background:#fff7e8;border-radius:10px;margin:0 0 15px}.notice.error{border-color:#e5b1a9;background:#fff1ed;color:var(--danger)}.notice .row{margin-top:7px}.board{display:grid;grid-template-columns:repeat(5,minmax(210px,1fr));gap:14px;align-items:start;overflow-x:auto;padding:2px 1px 20px;min-height:320px}.board.people{grid-template-columns:repeat(3,minmax(245px,1fr))}.column{background:#edf0e9;border:1px solid #e5e9e1;border-radius:13px;min-height:280px;padding:12px;position:relative}.column-head{display:flex;justify-content:space-between;align-items:center;margin:2px 2px 13px;font-size:12px;font-weight:650}.column-title{display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;background:var(--col-color)}.count{color:var(--muted);font-size:11px;font-weight:400}.column-body{display:flex;flex-direction:column;gap:11px}.column-empty{padding:22px 4px;text-align:center;color:#8a978c;font-size:12px;border:1px dashed #d6ded2;border-radius:9px}.card{padding:15px 13px 13px;background:#fff;border:1px solid var(--line);border-radius:11px;box-shadow:0 3px 7px #20362d04;cursor:pointer;position:relative;transition:border-color .2s,box-shadow .2s;transform-origin:top left}.card:hover{border-color:#9ebbab;box-shadow:0 7px 18px #20362d0c}.card.origin{border-color:var(--accent)}.card-top{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-bottom:9px}.rating{color:#a58943;letter-spacing:1px;white-space:nowrap}.card h3{font-size:14px;line-height:1.5;margin-bottom:10px;word-break:break-word}.card-numbers{display:flex;gap:18px;margin:8px 0 12px}.card-numbers span{font-size:10px;color:var(--muted);display:block}.card-numbers strong{font-size:16px;font-weight:550}.task-summary{font-size:11px;color:var(--muted);padding-top:10px;border-top:1px solid #eef1eb;display:flex;gap:14px}.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}.chip{font-size:10px;padding:3px 7px;border-radius:5px;background:#eef2ea;color:#627162}.chip.green{background:var(--accent-soft);color:var(--accent)}.chip.amber{background:#fbf0d9;color:var(--amber)}.chip.red{background:#fbe9e3;color:var(--danger)}.progress{margin-top:12px}.progress-heading{display:flex;justify-content:space-between;font-size:10px;color:var(--accent);margin-bottom:5px}.track{height:5px;background:#e9efe7;border-radius:9px;overflow:hidden}.bar{height:100%;border-radius:9px;background:var(--accent);transition:width .35s var(--ease)}.empty{padding:48px 20px;text-align:center;border:1px dashed #cfdacd;border-radius:14px;margin-bottom:24px}.empty h3{font-size:20px;font-weight:550;margin-bottom:7px}.empty p{color:var(--muted);margin-bottom:18px}.footer{margin-top:14px;color:#7c897e;font-size:11px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.batchbar{padding:11px 14px;border:1px solid #b9d5c3;background:#eff7ef;border-radius:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.batchbar select{width:190px;padding:7px}.task-check{position:absolute;right:11px;top:11px}.person-card h3{padding-right:20px}.person-card .identity{font-size:10px;color:var(--muted)}.person-card .quick{display:flex;gap:5px;margin-top:9px}.person-card .quick button{font-size:11px;padding:5px 8px}.person-card .activity{font-size:12px;margin:5px 0}.excluded-panel{margin:12px 0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}.excluded-panel summary{cursor:pointer;color:var(--muted);font-size:12px}
+.detail-layer{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;padding:24px;isolation:isolate}.backdrop{position:absolute;inset:0;background:#13271f67;backdrop-filter:blur(4px);z-index:-1}.detail-panel{width:min(1050px,96vw);max-height:91vh;background:var(--paper);border:1px solid #ffffff80;border-radius:18px;box-shadow:0 30px 100px #13271f38;display:flex;flex-direction:column;overflow:hidden;transform-origin:center}.detail-header{padding:23px 25px 18px;border-bottom:1px solid var(--line);background:#fff;display:flex;justify-content:space-between;gap:12px}.detail-header h2{font-size:23px;margin:6px 0}.detail-header .close{align-self:start;width:33px;height:33px;padding:0;border-radius:50%;font-size:21px;color:var(--muted)}.detail-body{overflow:auto;padding:20px 25px 27px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(240px,1fr);gap:20px}.detail-main,.detail-side{display:flex;flex-direction:column;gap:17px}.section{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.section-head button{font-size:11px;padding:5px 9px}.quantity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.quantity-grid div{background:#f4f6f0;border-radius:8px;padding:10px 8px}.quantity-grid small{font-size:10px;display:block}.quantity-grid strong{font-size:19px;font-weight:550;display:block;margin-top:3px}.stage-list{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:15px 0 4px}.stage-list small{font-size:10px}.stage-list strong{font-weight:550;font-size:12px;display:block}.stage-total{display:flex;justify-content:space-between;margin-top:15px;border-top:1px solid var(--line);padding-top:11px;font-size:12px}.hint{color:var(--muted);font-size:12px;margin-top:10px}.warning{color:var(--amber);font-size:12px;margin:10px 0}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field label{font-size:12px;color:var(--muted)}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check-line{display:flex;gap:8px;align-items:center;font-size:12px;margin:10px 0}.task-row{border-top:1px solid #edf1e9;padding:11px 0;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:9px;align-items:start}.task-row:first-child{border-top:0}.task-row .task-label{font-size:13px;font-weight:600;word-break:break-word}.task-row .task-meta{font-size:10px;color:var(--muted);margin-top:2px}.task-row .task-buttons{display:flex;gap:4px;flex-wrap:wrap;justify-content:end;max-width:140px}.task-row button{font-size:10px;padding:4px 7px}.group-heading{display:flex;justify-content:space-between;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}.group-heading button{font-size:10px;padding:3px 6px}.group-heading select{width:90px;padding:3px;font-size:10px}.achievement-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.achievement-grid strong{font-size:19px;font-weight:500;display:block}.achievement-grid small{font-size:10px}.links-list{margin:10px 0 0;padding:0;list-style:none;font-size:12px;word-break:break-all}.links-list a{color:var(--accent)}
+.dialog-layer{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:#13271f79;padding:20px}.dialog{background:#fff;border:1px solid #e6eee4;border-radius:16px;box-shadow:var(--shadow);padding:24px;width:min(620px,96vw);max-height:92vh;overflow:auto;animation:fadeIn .18s var(--ease)}.dialog.narrow{width:min(460px,95vw)}.dialog h2{margin-bottom:8px;font-size:21px}.dialog .lead{color:var(--muted);font-size:12px;margin-bottom:19px}.dialog-actions{display:flex;justify-content:end;gap:8px;margin-top:19px;flex-wrap:wrap}.form-error{background:#fff0eb;color:var(--danger);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:12px;white-space:pre-line}.roster{max-height:290px;overflow:auto;margin:14px 0}.roster-item{display:grid;grid-template-columns:auto minmax(0,1fr) 150px;gap:10px;align-items:center;padding:9px 1px;border-bottom:1px solid var(--line)}.roster-item select{font-size:12px;padding:6px}.person-manager{display:flex;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.person-manager .person-desc{min-width:0;flex:1}.person-manager .person-desc small{display:block;font-size:11px}.person-manager input{max-width:220px;font-size:12px}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;font-size:12px;padding:11px 18px;border-radius:10px;z-index:100;box-shadow:var(--shadow);max-width:90vw}.toast.error{background:#853e34}.impact-list{font-size:12px;color:var(--muted);padding-left:19px;max-height:220px;overflow:auto}.link-field{word-break:break-all}.storage-value{font-size:12px;white-space:pre-wrap;word-break:break-all;margin-bottom:10px}.file-control{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}.dialog p{word-break:break-word}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}a{color:var(--accent)}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@media(max-width:1100px){.filters{grid-template-columns:minmax(190px,1fr) 130px 140px}.board{grid-template-columns:repeat(5,235px)}.intro{align-items:center}.metrics{gap:18px}.workspace{padding:22px}.topbar{padding:15px 22px}.detail-body{grid-template-columns:minmax(0,1.5fr) minmax(220px,1fr)}}@media(max-width:720px){.topbar{flex-wrap:wrap;padding:15px}.actions{width:100%;justify-content:end}.save-status{margin-right:auto}.workspace{padding:19px 15px}.intro{align-items:start;flex-direction:column}.intro h2{font-size:25px}.metrics{gap:30px}.metric strong{font-size:22px}.filters{grid-template-columns:1fr 1fr}.filters .search{grid-column:span 2}.board{grid-template-columns:repeat(5,240px)}.board.people{grid-template-columns:repeat(3,260px)}.detail-layer{padding:8px}.detail-panel{width:100%;max-height:96vh;border-radius:12px}.detail-body{display:flex;flex-direction:column;padding:15px}.detail-header{padding:17px}.detail-header h2{font-size:20px}.quantity-grid{grid-template-columns:repeat(2,1fr)}.dialog{padding:20px}.field-grid{gap:6px}.roster-item{grid-template-columns:auto minmax(0,1fr) 110px}.footer{font-size:10px}.task-row .task-buttons{max-width:125px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="14" rx="3"/><path d="M8 6l1-3h6l1 3"/><circle cx="12" cy="13" r="4"/></svg></div><div><h1>PhotoTrace</h1><p>每一场拍摄，都有迹可循</p></div></div>
+  <div class="actions"><span id="save-status" class="save-status" role="status">正在读取存档</span><button data-action="backup">导出备份</button><button data-action="restore">恢复备份</button><button class="primary" data-action="new-project">＋ 新建拍摄</button></div>
+</header>
+<div id="download-notice" class="notice" hidden style="margin:12px 28px 0" role="status"></div>
+<main class="workspace" id="workspace">
+  <div id="storage-notice" hidden class="notice error" role="alert"></div>
+  <div class="intro"><div><p class="eyebrow">PHOTOGRAPHY WORKSPACE</p><h2 id="view-title">拍摄项目</h2><p id="view-subtitle">从导入到发布，把摄影工作放在一处。</p></div><div id="metrics" class="metrics"></div></div>
+  <nav class="tabs" role="tablist" aria-label="工作视图"><button role="tab" id="tab-projects" aria-selected="true" data-action="view-projects">项目总览 <span id="project-count" class="tab-count">0</span></button><button role="tab" id="tab-people" aria-selected="false" data-action="view-people">人物任务 <span id="task-count" class="tab-count">0</span></button><button class="quiet" data-action="manage-people">人物库</button></nav>
+  <div class="filters" aria-label="搜索与筛选"><input class="search" id="search" type="search" aria-label="搜索项目、人物或团体" placeholder="搜索拍摄、人物、团体…"><select id="rating-filter" aria-label="评级筛选"><option value="">全部评级</option><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option><option value="0">未评级</option></select><select id="resource-filter" aria-label="资源筛选"><option value="">全部资源</option><option value="active">进行中</option><option value="ipad">iPad 筛图</option><option value="pixcake">像素蛋糕</option><option value="idle">未占用资源</option></select><input id="date-from" type="date" aria-label="起始拍摄日期" title="起始拍摄日期"><input id="date-to" type="date" aria-label="结束拍摄日期" title="结束拍摄日期"><button data-action="clear-filters" class="quiet">重置筛选</button></div>
+  <div id="batchbar" hidden></div><div id="empty" hidden></div><div id="board" class="board" aria-label="摄影项目看板"></div><div id="excluded"></div>
+  <footer class="footer"><span>本机离线保存 · 定期导出备份</span><span>导入 30% · 初筛 30% · 修图 30% · 发布 10%</span></footer>
+</main>
+<div id="detail-layer" class="detail-layer" hidden><div class="backdrop" data-action="close-detail"></div><section id="detail-panel" class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title"></section></div>
+<div id="dialog-layer" class="dialog-layer" hidden></div><div id="confirm-layer" class="dialog-layer" hidden></div>
+<input id="restore-file" type="file" class="file-control" accept="application/json,.json" aria-label="选择 PhotoTrace 备份文件"><div id="toast" class="toast" role="status" hidden></div>
+<script id="phototrace-domain">
+'use strict';
+// 1. Pure business model. Progress and statuses are derived, never authoritative stored fields.
+const PhotoTraceCore = (() => {
+  const FORMAT = 'PhotoTrace', VERSION = 1;
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const fail = message => { throw new Error(message); };
+  const uid = prefix => prefix + '-' + (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2));
+  const empty = () => ({projects:[],groups:[],people:[],tasks:[],settings:{motion:'system'}});
+  const project = (name, date = '') => ({id:uid('project'),name,date,rating:0,imported:false,selectionComplete:false,peopleConfirmed:false,suspended:false,quantities:{original:null,remaining:null,selected:null,exported:null},resources:{ipad:false,pixcake:false},storage:{original:'',working:'',delivery:'',cloudBackup:false,longTerm:false},location:'',equipment:'',notes:''});
+  const person = (name, note = '') => ({id:uid('person'),name,note});
+  const task = (projectId, personId, groupId = null) => ({id:uid('task'),projectId,personId,groupId,retouched:false,published:false,excluded:false,links:[],notes:''});
+  const isObject = o => o !== null && typeof o === 'object' && !Array.isArray(o);
+  function object(o, label) { if (!isObject(o)) fail(label + '必须是对象'); }
+  function string(s, label, nonempty = false) { if (typeof s !== 'string' || (nonempty && !s.trim()) || s.length > 100000) fail(label + '必须是' + (nonempty ? '非空' : '') + '文本'); }
+  function boolean(b, label) { if (typeof b !== 'boolean') fail(label + '必须是布尔值'); }
+  function rating(n, label) { if (!Number.isInteger(n) || n < 0 || n > 5) fail(label + '必须是 0–5 的整数'); }
+  function validDate(value) { if (value === '') return true; if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false; const d = new Date(value + 'T00:00:00Z'); return !Number.isNaN(d.getTime()) && d.toISOString().slice(0,10) === value; }
+  function quantityErrors(q) {
+    if (!isObject(q)) return ['数量字段缺失'];
+    const labels = {original:'原片总数',remaining:'待筛选数',selected:'初筛入选数',exported:'精修导出数'};
+    const errors = [];
+    for (const [key,label] of Object.entries(labels)) if (q[key] !== null && (!Number.isSafeInteger(q[key]) || q[key] < 0)) errors.push(label + '必须是非负整数，未知请留空');
+    if (q.original !== null && q.remaining !== null && q.remaining > q.original) errors.push('待筛选数不能超过原片总数');
+    if (q.original !== null && q.selected !== null && q.selected > q.original) errors.push('初筛入选数不能超过原片总数');
+    if (q.original !== null && q.remaining !== null && q.selected !== null && q.selected > q.original - q.remaining) errors.push('初筛入选数不能超过已浏览数量（原片总数 − 待筛选数）');
+    return errors;
+  }
+  function validate(data) {
+    object(data,'数据');
+    const maps = {};
+    for (const name of ['projects','groups','people','tasks']) {
+      if (!Array.isArray(data[name]) || data[name].length > 100000) fail(name + '必须是有效数组');
+      const m = new Map();
+      for (const record of data[name]) { object(record,name + '记录'); string(record.id,name + ' ID',true); if (m.has(record.id)) fail(name + '存在重复 ID：' + record.id); m.set(record.id,record); }
+      maps[name] = m;
+    }
+    object(data.settings,'设置'); if (!['system','reduced'].includes(data.settings.motion)) fail('动画设置无效');
+    for (const p of data.projects) {
+      string(p.name,'项目名称',true); string(p.date,'拍摄日期'); if (!validDate(p.date)) fail(p.name + '的拍摄日期无效'); rating(p.rating,'项目评级');
+      for (const key of ['imported','selectionComplete','peopleConfirmed','suspended']) boolean(p[key],p.name + ' ' + key);
+      const errors = quantityErrors(p.quantities); if (errors.length) fail(p.name + '：' + errors.join('；'));
+      if (p.selectionComplete && (!p.imported || !p.peopleConfirmed || (p.quantities.remaining !== null && p.quantities.remaining !== 0))) fail(p.name + '的初筛完成标记与导入、名单或待筛选数不一致');
+      object(p.resources,'资源'); for (const key of ['ipad','pixcake']) boolean(p.resources[key],'资源 ' + key);
+      object(p.storage,'存储信息'); for (const key of ['original','working','delivery']) string(p.storage[key],'存储位置'); for (const key of ['cloudBackup','longTerm']) boolean(p.storage[key],'存储标记');
+      for (const key of ['location','equipment','notes']) string(p[key],'项目 ' + key);
+    }
+    for (const g of data.groups) { if (!maps.projects.has(g.projectId)) fail('团体关联了不存在的项目：' + g.id); string(g.name,'团体名称',true); rating(g.rating,'团体评级'); }
+    for (const p of data.people) { string(p.name,'人物名称',true); string(p.note,'人物备注'); }
+    const pairs = new Set();
+    for (const t of data.tasks) {
+      const p = maps.projects.get(t.projectId); if (!p || !maps.people.has(t.personId)) fail('人物任务关联断裂：' + t.id);
+      if (!p.peopleConfirmed) fail('未经名单确认的项目不能有正式人物任务：' + p.name);
+      if (t.groupId !== null && (!maps.groups.has(t.groupId) || maps.groups.get(t.groupId).projectId !== t.projectId)) fail('人物任务的团体关联无效：' + t.id);
+      const pair = JSON.stringify([t.projectId,t.personId]); if (pairs.has(pair)) fail('同一项目与人物存在重复任务：' + t.id); pairs.add(pair);
+      for (const key of ['retouched','published','excluded']) boolean(t[key],'任务 ' + key);
+      if (t.published && !t.retouched) fail('已发布的任务必须完成修图：' + t.id);
+      if (!Array.isArray(t.links) || t.links.length > 1000) fail('发布链接必须是数组'); for (const link of t.links) { string(link,'发布链接',true); if (!/^https?:\/\//i.test(link)) fail('发布链接仅接受 http 或 https 地址'); try { const url = new URL(link); if (!url.hostname) fail('发布链接缺少网址'); } catch { fail('发布链接不是有效网址'); } }
+      string(t.notes,'任务备注');
+    }
+    return data;
+  }
+  function summary(data,p) {
+    const all = data.tasks.filter(t => t.projectId === p.id), active = all.filter(t => !t.excluded);
+    const n = active.length, r = active.filter(t => t.retouched).length, pub = active.filter(t => t.published).length;
+    const imported = p.imported ? 1 : 0;
+    let selected = 0;
+    if (p.selectionComplete) selected = 1;
+    else if (p.imported && p.quantities.original > 0 && p.quantities.remaining !== null) selected = Math.max(0,Math.min(1,(p.quantities.original - p.quantities.remaining) / p.quantities.original));
+    const retouched = p.peopleConfirmed ? (n ? r/n : 1) : 0, published = p.peopleConfirmed ? (n ? pub/n : 1) : 0;
+    const progress = Math.round((30*imported + 30*selected + 30*retouched + 10*published)*1e8)/1e8;
+    const baseStatus = !p.selectionComplete ? 'pending' : (!n || pub === n) ? 'done' : r === n ? 'retouched' : 'selected';
+    return {progress,stages:{imported,selected,retouched,published},status:p.suspended?'suspended':baseStatus,baseStatus,activeCount:n,retouchedCount:r,publishedCount:pub,actualRetouched:all.filter(t=>t.retouched).length,actualPublished:all.filter(t=>t.published).length,active:p.resources.ipad||p.resources.pixcake,reason:baseStatus==='done'?(n?'已发布':'无需后续处理'):null};
+  }
+  function editQuantities(data,projectId,quantities,imported) {
+    const candidate = clone(data), p = candidate.projects.find(p=>p.id===projectId); if (!p) fail('项目不存在');
+    const errors = quantityErrors(quantities); if (errors.length) fail(errors.join('\n')); boolean(imported,'导入标记');
+    const warnings = [];
+    if (p.selectionComplete && (!imported || (quantities.remaining !== null && quantities.remaining > 0))) { p.selectionComplete = false; warnings.push('项目将重新初筛。已有任务、修图、发布和链接保留；人物任务暂时隐藏并暂停编辑。'); }
+    p.quantities = clone(quantities); p.imported = imported;
+    if (quantities.exported !== null && quantities.selected !== null && quantities.exported > quantities.selected) warnings.push('精修导出数超过当前入选数。确认后保留真实导出成果，不扣减数量。');
+    validate(candidate); return {candidate,warnings};
+  }
+  function reopen(data,projectId) {
+    const candidate=clone(data), p=candidate.projects.find(p=>p.id===projectId); if (!p) fail('项目不存在'); if (!p.peopleConfirmed) fail('此项目尚未确认人物名单'); p.selectionComplete=false; validate(candidate); return {candidate,warnings:['重新初筛会暂时隐藏人物视图中的任务并暂停状态编辑，已有成果和后期进度贡献全部保留。请在数量编辑中填写新的待筛选数。']};
+  }
+  function confirmPeople(data,projectId,entries) {
+    const candidate=clone(data), p=candidate.projects.find(p=>p.id===projectId); if (!p) fail('项目不存在');
+    if (!p.imported) fail('请先标记原片已导入'); if (p.quantities.remaining !== null && p.quantities.remaining > 0) fail('仍有待筛选照片，请先在编辑数量中将待筛选数更新为 0；未知可以留空并人工确认。');
+    const seen=new Set();
+    for (const entry of entries) { if (seen.has(entry.personId)) fail('名单中重复选择了同一人物'); seen.add(entry.personId); if (!candidate.people.some(person=>person.id===entry.personId)) fail('名单中的人物不存在'); if (entry.groupId !== null && !candidate.groups.some(g=>g.id===entry.groupId&&g.projectId===projectId)) fail('名单中的团体不属于此项目'); }
+    for (const t of candidate.tasks.filter(t=>t.projectId===projectId)) t.excluded=!seen.has(t.personId);
+    for (const entry of entries) { let t=candidate.tasks.find(t=>t.projectId===projectId&&t.personId===entry.personId); if (!t) { t=task(projectId,entry.personId,entry.groupId); candidate.tasks.push(t); } t.groupId=entry.groupId; t.excluded=false; }
+    p.selectionComplete=true; p.peopleConfirmed=true; validate(candidate); return {candidate,warnings:entries.length?[]:['确认没有有效人物任务：后续修图与发布阶段按 100% 计算，完成原因记为“无需后续处理”。']};
+  }
+  function taskLabel(data,t) { const p=data.projects.find(p=>p.id===t.projectId),person=data.people.find(p=>p.id===t.personId); return (person?.name||t.personId) + '（' + (person?.note?person.note+' · ':'') + (person?.id.slice(-8)||t.personId) + '） · ' + (p?.name||t.projectId); }
+  function batch(data,ids,operation) {
+    if (!ids.length) fail('请先勾选人物任务'); if (new Set(ids).size!==ids.length) fail('所选任务重复');
+    if (!['retouch','unretouch','publish','unpublish','exclude','include'].includes(operation)) fail('未知批量操作');
+    const selected=ids.map(id=>data.tasks.find(t=>t.id===id)), errors=[];
+    selected.forEach((t,i)=>{ if (!t) { errors.push('任务不存在：'+ids[i]); return; } const p=data.projects.find(p=>p.id===t.projectId); if (!p?.selectionComplete) errors.push(taskLabel(data,t)+'：重新初筛期间暂停人物编辑'); else if (operation==='publish'&&!t.retouched) errors.push(taskLabel(data,t)+'：尚未完成修图'); });
+    if (errors.length) fail(errors.join('\n'));
+    const candidate=clone(data), warnings=[];
+    for (const id of ids) { const t=candidate.tasks.find(t=>t.id===id); if (operation==='retouch') t.retouched=true; if (operation==='unretouch') { if (t.published) warnings.push(taskLabel(data,t)+'：同步撤销发布标记，保留发布链接'); t.retouched=false; t.published=false; } if (operation==='publish') t.published=true; if (operation==='unpublish') t.published=false; if (operation==='exclude') t.excluded=true; if (operation==='include') t.excluded=false; }
+    validate(candidate); return {candidate,warnings};
+  }
+  function visibleTasks(data) { return data.tasks.filter(t=>!t.excluded && data.projects.some(p=>p.id===t.projectId&&p.selectionComplete)); }
+  function archive(data,time=new Date().toISOString()) { validate(data); return {format:FORMAT,version:VERSION,exportedAt:time,data:clone(data)}; }
+  function parseArchive(text) { let parsed; try { parsed=JSON.parse(text); } catch { fail('文件不是有效 JSON，无法恢复'); } object(parsed,'存档'); if (parsed.format!==FORMAT) fail('不是 PhotoTrace 存档，不能导入通用看板格式'); if (parsed.version!==VERSION) fail('不支持存档版本 '+String(parsed.version)+'；当前仅支持版本 '+VERSION); string(parsed.exportedAt,'导出时间',true); if (Number.isNaN(Date.parse(parsed.exportedAt))) fail('导出时间无效'); validate(parsed.data); return clone(parsed.data); }
+  return Object.freeze({FORMAT,VERSION,clone,uid,empty,project,person,task,validate,quantityErrors,summary,editQuantities,reopen,confirmPeople,batch,visibleTasks,taskLabel,archive,parseArchive});
+})();
+</script>
+<script id="phototrace-persistence">
+'use strict';
+// 2. Durable transactions. Never advance committed data until the storage write succeeds.
+const PhotoTracePersistence = (() => {
+  const KEY='phototrace.v1.archive', SNAPSHOT_KEY='phototrace.v1.before-restore';
+  class Repository {
+    constructor(storage) { this.storage=storage; this.data=PhotoTraceCore.empty(); this.raw=null; this.pending=null; this.blocked=false; this.error=null; }
+    load() {
+      try { this.raw=this.storage.getItem(KEY); if (this.raw!==null) this.data=PhotoTraceCore.parseArchive(this.raw); }
+      catch(error) { this.blocked=true; this.error=error.message; }
+      return this.data;
+    }
+    commit(candidate) {
+      PhotoTraceCore.validate(candidate);
+      this.pending=PhotoTraceCore.clone(candidate);
+      if (this.blocked) { this.error='启动存档损坏或不可读取，已禁止覆盖。请先导出原存档或恢复有效备份。'; return false; }
+      try { const raw=JSON.stringify(PhotoTraceCore.archive(candidate)); this.storage.setItem(KEY,raw); this.raw=raw; this.data=PhotoTraceCore.clone(candidate); this.pending=null; this.error=null; return true; }
+      catch(error) { this.error='保存失败：'+error.message; return false; }
+    }
+    restore(candidate) {
+      PhotoTraceCore.validate(candidate);
+      // Preserve the exact previous bytes, even if corrupt; a failed snapshot aborts replacement.
+      try { this.storage.setItem(SNAPSHOT_KEY,JSON.stringify({format:'PhotoTraceRestoreSnapshot',version:1,createdAt:new Date().toISOString(),raw:this.raw})); }
+      catch(error) { this.error='恢复前快照保存失败，未替换原数据：'+error.message; return false; }
+      try { const raw=JSON.stringify(PhotoTraceCore.archive(candidate)); this.storage.setItem(KEY,raw); this.raw=raw; this.data=PhotoTraceCore.clone(candidate); this.pending=null; this.blocked=false; this.error=null; return true; }
+      catch(error) { this.error='恢复保存失败，原存档保留：'+error.message; return false; }
+    }
+    beforeRestore() { const raw=this.storage.getItem(SNAPSHOT_KEY); if (!raw) throw new Error('没有恢复前快照'); const snapshot=JSON.parse(raw); if (snapshot.format!=='PhotoTraceRestoreSnapshot'||snapshot.version!==1) throw new Error('快照格式无效'); if (snapshot.raw===null) return PhotoTraceCore.empty(); return PhotoTraceCore.parseArchive(snapshot.raw); }
+    snapshotRaw() { return this.storage.getItem(SNAPSHOT_KEY); }
+  }
+  return Object.freeze({KEY,SNAPSHOT_KEY,Repository});
+})();
+</script>
+<script id="phototrace-ui">
+'use strict';
+// 3. User interface and interruptible animations. All mutations pass through submit().
+(() => {
+  const C=PhotoTraceCore, $=selector=>document.querySelector(selector);
+  const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const num=value=>value===null?'—':Number(value).toLocaleString('zh-CN');
+  const pct=value=>Number(value.toFixed(2)).toString()+'%';
+  const stars=value=>value?'★'.repeat(value):'未评级';
+  const statusNames={suspended:'挂起',pending:'待筛选',selected:'已筛选',retouched:'已修图',done:'已完成'};
+  let storage; try { storage=window.localStorage; } catch(error) { storage={getItem(){throw error},setItem(){throw error}}; }
+  const repo=new PhotoTracePersistence.Repository(storage); repo.load();
+  const state={view:'projects',detail:null,selected:new Set(),origin:null,modal:null,confirm:null,busy:false,toastTimer:null,dialogFocus:null,detailFocus:null,animation:null,animationToken:0,filters:{search:'',rating:'',resource:'',from:'',to:''}};
+  const reduced=()=>repo.data.settings.motion==='reduced'||window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function toast(message,error=false) { const el=$('#toast'); clearTimeout(state.toastTimer); el.textContent=message; el.className='toast'+(error?' error':''); el.hidden=false; state.toastTimer=setTimeout(()=>el.hidden=true,4000); }
+  function storageStatus() {
+    const bad=repo.blocked||repo.pending||repo.error, el=$('#save-status'); el.classList.toggle('bad',!!bad); el.textContent=bad?'● 未保存 / 需处理':repo.raw?'● 已自动保存':'● 本机离线保存';
+    const notice=$('#storage-notice'); notice.hidden=!bad;
+    if (bad) notice.innerHTML='<strong>'+esc(repo.error||'还有未保存的工作数据')+'</strong><p>输入与候选数据已保留，最后成功存档保持完整。</p><div class="row">'+(repo.pending?'<button data-action="export-pending">导出未保存工作数据</button><button data-action="retry-save">重试保存</button>':'')+(repo.raw!==null?'<button data-action="export-raw">导出原存档</button>':'')+'<button data-action="restore">恢复有效备份</button></div>';
+  }
+  function showError(message) { const el=$('#dialog-error'); if (el) { el.hidden=false; el.textContent=message; if(repo.pending)el.insertAdjacentHTML('beforeend','<div class="row"><button type="button" data-action="export-pending">导出未保存工作数据</button><button type="button" data-action="retry-save">重试保存</button></div>'); } else toast(message,true); }
+  function showDialog(html,kind='form') {
+    state.dialogFocus=document.activeElement; state.modal=kind; const layer=$('#dialog-layer'); layer.innerHTML=html; layer.hidden=false; $('#workspace').inert=true; $('#detail-panel').inert=true; queueMicrotask(()=>layer.querySelector('input:not([type=checkbox]),button,select')?.focus());
+  }
+  function closeDialog(force=false) {
+    if (state.busy||state.confirm) return;
+    if (!force&&repo.pending) { repo.pending=null; if(!repo.blocked)repo.error=null; state.pendingForm=null; storageStatus(); }
+    $('#dialog-layer').hidden=true; $('#dialog-layer').innerHTML=''; state.modal=null; state.rosterPeople=[]; $('#workspace').inert=!!state.detail; $('#detail-panel').inert=false; state.dialogFocus?.isConnected&&state.dialogFocus.focus();
+  }
+  const errorBlock='<div id="dialog-error" class="form-error" role="alert" hidden></div>';
+  const formActions=(text='保存')=>'<div class="dialog-actions"><button type="button" data-action="cancel-dialog">取消</button><button type="submit" class="primary">'+text+'</button></div>';
+  function confirmation(warnings,title='确认这次修改',yes='确认并保存') {
+    return new Promise(resolve=>{ state.confirm=resolve; $('#dialog-layer').inert=true; $('#detail-panel').inert=true; const layer=$('#confirm-layer'); layer.innerHTML='<section class="dialog narrow" role="dialog" aria-modal="true" aria-labelledby="confirm-title"><h2 id="confirm-title">'+esc(title)+'</h2><ul class="impact-list">'+warnings.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul><div class="dialog-actions"><button data-action="confirm-no">返回修改</button><button class="primary" data-action="confirm-yes">'+esc(yes)+'</button></div></section>'; layer.hidden=false; layer.querySelector('button').focus(); });
+  }
+  function resolveConfirmation(value) { const resolve=state.confirm; state.confirm=null; $('#confirm-layer').hidden=true; $('#confirm-layer').innerHTML=''; $('#dialog-layer').inert=false; $('#detail-panel').inert=!!state.modal; resolve?.(value); }
+  async function submit(make,options={}) {
+    if (state.busy) return false;
+    if (repo.pending&&!options.retry) { showError('存在未保存的候选数据，请先重试保存或导出，避免覆盖工作。'); return false; }
+    state.busy=true;
+    try {
+      const result=make(); C.validate(result.candidate);
+      if (result.warnings?.length && !await confirmation(result.warnings,options.title||'确认影响')) return false;
+      const ok=options.restore?repo.restore(result.candidate):repo.commit(result.candidate); storageStatus();
+      if (!ok) { state.pendingForm=options.form||null; showError(repo.error+'\n输入保留，可修正后重试，也可导出未保存工作数据。'); return false; }
+      state.pendingForm=null;
+      if (options.clearSelection) state.selected.clear();
+      state.busy=false; if (options.close!==false) closeDialog(true); render(); if (state.detail) renderDetail(); toast(options.success||'已保存'); return true;
+    } catch(error) { showError(error.message); return false; }
+    finally { state.busy=false; }
+  }
+  function projectMatch(p) {
+    const f=state.filters, d=repo.data;
+    if (f.rating!==''&&p.rating!==Number(f.rating)) return false;
+    if (f.from&&(!p.date||p.date<f.from)||f.to&&(!p.date||p.date>f.to)) return false;
+    const active=p.resources.ipad||p.resources.pixcake;
+    if (f.resource==='active'&&!active||f.resource==='idle'&&active||f.resource==='ipad'&&!p.resources.ipad||f.resource==='pixcake'&&!p.resources.pixcake) return false;
+    if (f.search) { const people=d.tasks.filter(t=>t.projectId===p.id).map(t=>d.people.find(person=>person.id===t.personId)).filter(Boolean); const text=[p.name,...d.groups.filter(g=>g.projectId===p.id).map(g=>g.name),...people.map(person=>person.name+' '+person.note+' '+person.id.slice(-8))].join(' ').toLocaleLowerCase(); if (!text.includes(f.search.toLocaleLowerCase())) return false; }
+    return true;
+  }
+  function taskMatch(t) { const query=state.filters.search.toLocaleLowerCase();if(!query)return true;const d=repo.data,p=d.projects.find(p=>p.id===t.projectId),person=d.people.find(person=>person.id===t.personId),group=d.groups.find(g=>g.id===t.groupId);return [p.name,person.name,person.note,person.id.slice(-8),group?.name||''].join(' ').toLocaleLowerCase().includes(query); }
+  const sortProjects=(a,b)=>b.rating-a.rating||b.date.localeCompare(a.date)||a.name.localeCompare(b.name,'zh-CN')||a.id.localeCompare(b.id);
+  function resourceChips(p) { return (p.resources.ipad?'<span class="chip green">iPad 筛图</span>':'')+(p.resources.pixcake?'<span class="chip green">像素蛋糕</span>':'')+(p.suspended&&(p.resources.ipad||p.resources.pixcake)?'<span class="chip amber">挂起仍占用资源</span>':''); }
+  function projectCard(p) {
+    const s=C.summary(repo.data,p);
+    return '<article class="card'+(state.detail===p.id?' origin':'')+'" tabindex="0" role="button" aria-label="查看拍摄：'+esc(p.name)+'" data-project="'+esc(p.id)+'" data-key="project:'+esc(p.id)+'"><div class="card-top"><span>'+esc(p.date||'日期待补')+'</span><span class="rating" aria-label="'+p.rating+' 星">'+stars(p.rating)+'</span></div><h3>'+esc(p.name)+'</h3><div class="card-numbers"><div><span>原片</span><strong class="mono">'+num(p.quantities.original)+'</strong></div><div><span>入选</span><strong class="mono">'+num(p.quantities.selected)+'</strong></div><div><span>导出</span><strong class="mono">'+num(p.quantities.exported)+'</strong></div></div><div class="task-summary"><span>修图 '+s.retouchedCount+'/'+s.activeCount+'</span><span>发布 '+s.publishedCount+'/'+s.activeCount+'</span></div><div class="chips">'+(!p.selectionComplete?'<span class="chip">'+(p.peopleConfirmed?'重新初筛':'待筛 '+num(p.quantities.remaining))+'</span>':'')+(s.reason?'<span class="chip green">'+esc(s.reason)+'</span>':'')+resourceChips(p)+'</div>'+(s.active?'<div class="progress" data-progress="'+s.progress+'"><div class="progress-heading"><span>进行中</span><span>'+pct(s.progress)+'</span></div><div class="track"><div class="bar" style="width:'+s.progress+'%"></div></div></div>':'')+'</article>';
+  }
+  const batchOptions='<option value="retouch">标记修图完成</option><option value="unretouch">撤销修图完成</option><option value="publish">标记发布完成</option><option value="unpublish">撤销发布完成</option><option value="exclude">不再处理</option><option value="include">恢复处理</option>';
+  function batchbar(scope='main') { return '<div class="batchbar"><strong>已选 '+state.selected.size+' 项</strong><select aria-label="批量操作" id="batch-operation-'+scope+'">'+batchOptions+'</select><button data-action="batch" data-scope="'+scope+'" class="primary">应用</button><button data-action="clear-selection" class="quiet">清空选择</button></div>'; }
+  function personCard(t,excluded=false) {
+    const d=repo.data, p=d.projects.find(p=>p.id===t.projectId), person=d.people.find(p=>p.id===t.personId), g=d.groups.find(g=>g.id===t.groupId);
+    return '<article class="card person-card" data-key="task:'+esc(t.id)+'"><input type="checkbox" class="task-check" data-select-task="'+esc(t.id)+'" aria-label="选择 '+esc(C.taskLabel(d,t))+'" '+(state.selected.has(t.id)?'checked':'')+'><div class="card-top">'+esc(p.date||'日期待补')+'</div><h3>'+esc(person.name)+'</h3><div class="identity">'+esc((person.note?person.note+' · ':'')+'ID '+person.id.slice(-8))+'</div><div class="activity">'+esc(p.name)+'</div>'+(g?'<span class="chip">'+esc(g.name)+'</span>':'')+'<div class="chips"><span class="chip '+(t.retouched?'green':'')+'">'+(t.retouched?'修图完成':'待修图')+'</span><span class="chip '+(t.published?'green':'')+'">'+(t.published?'已发布':'待发布')+'</span>'+(excluded?'<span class="chip amber">不再处理</span>':'')+'</div><div class="quick"><button data-action="task-action" data-id="'+esc(t.id)+'" data-op="'+(excluded?'include':!t.retouched?'retouch':!t.published?'publish':'unpublish')+'">'+(excluded?'恢复处理':!t.retouched?'完成修图':!t.published?'完成发布':'撤销发布')+'</button><button data-action="open-project" data-id="'+esc(p.id)+'">拍摄详情</button></div></article>';
+  }
+  function animateLayout(mutator) {
+    const board=$('#board'), previous=new Map(); for (const el of board.querySelectorAll('[data-key]')) previous.set(el.dataset.key,{rect:el.getBoundingClientRect(),progress:el.querySelector('.bar')?.style.width});
+    mutator();
+    if (reduced()) return;
+    if (typeof Element.prototype.animate!=='function') { board.style.animation='none'; void board.offsetWidth; board.style.animation='fadeIn 150ms'; return; }
+    for (const el of board.querySelectorAll('[data-key]')) {
+      const old=previous.get(el.dataset.key), rect=el.getBoundingClientRect();
+      if (old) { const x=old.rect.left-rect.left,y=old.rect.top-rect.top; if (Math.abs(x)>.5||Math.abs(y)>.5) el.animate([{transform:'translate('+x+'px,'+y+'px)'},{transform:'none'}],{duration:240,easing:'cubic-bezier(.2,0,0,1)'}); const bar=el.querySelector('.bar'); if (bar&&old.progress&&old.progress!==bar.style.width) bar.animate([{width:old.progress},{width:bar.style.width}],{duration:350,easing:'cubic-bezier(.16,1,.3,1)'}); }
+      else el.animate([{opacity:0},{opacity:1}],{duration:180});
+    }
+  }
+  function render() {
+    storageStatus(); const d=repo.data, projects=d.projects.filter(projectMatch).sort(sortProjects), visible=C.visibleTasks(d), active=d.projects.filter(p=>C.summary(d,p).active).length, done=d.projects.filter(p=>C.summary(d,p).baseStatus==='done').length;
+    $('#metrics').innerHTML='<div class="metric"><span>拍摄项目</span><strong>'+d.projects.length+'</strong></div><div class="metric"><span>进行中</span><strong>'+active+'</strong></div><div class="metric"><span>已完成</span><strong>'+done+'</strong></div>';
+    $('#project-count').textContent=d.projects.length; $('#task-count').textContent=visible.length; $('#tab-projects').setAttribute('aria-selected',state.view==='projects'); $('#tab-people').setAttribute('aria-selected',state.view==='people'); $('#view-title').textContent=state.view==='projects'?'拍摄项目':'人物任务'; $('#view-subtitle').textContent=state.view==='projects'?'从导入到发布，把摄影工作放在一处。':'跨拍摄查看同一人物，修图与发布保持同步。';
+    const empty=$('#empty'); empty.hidden=d.projects.length>0; empty.className='empty'; empty.innerHTML='<h3>记录下一场拍摄</h3><p>建立项目，记录数量，初筛完成后确认人物名单。</p><button class="primary" data-action="new-project">＋ 新建拍摄</button>';
+    $('#batchbar').hidden=state.view!=='people'||!state.selected.size; $('#batchbar').innerHTML=state.selected.size?batchbar():'';
+    const board=$('#board'); board.className='board'+(state.view==='people'?' people':'');
+    animateLayout(()=>{
+      if (state.view==='projects') board.innerHTML=Object.entries(statusNames).map(([key,name],i)=>{ const cards=projects.filter(p=>C.summary(d,p).status===key); return '<section class="column" data-column="'+key+'" aria-label="'+name+'" style="--col-color:'+['#9e9b93','#ab985f','#4d9271','#6a90a6','#346c51'][i]+'"><div class="column-head"><span class="column-title"><span class="dot"></span>'+name+'</span><span class="count">'+cards.length+'</span></div><div class="column-body">'+(cards.map(projectCard).join('')||'<div class="column-empty">暂无项目</div>')+'</div></section>'; }).join('');
+      else { const ids=new Set(projects.map(p=>p.id)), tasks=visible.filter(t=>ids.has(t.projectId)&&taskMatch(t)).sort((a,b)=>sortProjects(d.projects.find(p=>p.id===a.projectId),d.projects.find(p=>p.id===b.projectId))||d.people.find(p=>p.id===a.personId).name.localeCompare(d.people.find(p=>p.id===b.personId).name,'zh-CN')); board.innerHTML=['待修图','待发布','已发布'].map((name,i)=>{ const list=tasks.filter(t=>(!t.retouched?0:!t.published?1:2)===i); return '<section class="column" aria-label="'+name+'" style="--col-color:'+['#ab985f','#6a90a6','#346c51'][i]+'"><div class="column-head"><span class="column-title"><span class="dot"></span>'+name+'</span><span class="count">'+list.length+'</span></div><div class="column-body">'+(list.map(t=>personCard(t)).join('')||'<div class="column-empty">暂无人物任务</div>')+'</div></section>'; }).join(''); }
+    });
+    const excluded=d.tasks.filter(t=>t.excluded&&taskMatch(t)&&projects.some(p=>p.id===t.projectId&&p.selectionComplete)); $('#excluded').innerHTML=state.view==='people'&&excluded.length?'<details class="excluded-panel"><summary>不再处理 · '+excluded.length+' 项（成果保留）</summary><div class="board people">'+excluded.map(t=>personCard(t,true)).join('')+'</div></details>':'';
+  }
+  function projectTasks(p) {
+    const d=repo.data, all=d.tasks.filter(t=>t.projectId===p.id), groups=d.groups.filter(g=>g.projectId===p.id).sort((a,b)=>b.rating-a.rating||a.name.localeCompare(b.name,'zh-CN'));
+    function rows(tasks) { return tasks.map(t=>{ const person=d.people.find(person=>person.id===t.personId), disabled=!p.selectionComplete; return '<div class="task-row"><input type="checkbox" data-select-task="'+esc(t.id)+'" aria-label="选择 '+esc(C.taskLabel(d,t))+'" '+(state.selected.has(t.id)?'checked ':'')+(disabled?'disabled':'')+'><div><div class="task-label">'+esc(person.name)+'</div><div class="task-meta">'+esc(person.note||person.id.slice(-8))+' · '+(t.retouched?'修图完成':'待修图')+' · '+(t.published?'已发布':'待发布')+'</div></div><div class="task-buttons"><button data-action="edit-task" data-id="'+esc(t.id)+'" '+(disabled?'disabled':'')+'>链接 / 备注</button><button data-action="task-action" data-id="'+esc(t.id)+'" data-op="'+(t.excluded?'include':'exclude')+'" '+(disabled?'disabled':'')+'>'+(t.excluded?'恢复处理':'不再处理')+'</button></div></div>'; }).join(''); }
+    const active=all.filter(t=>!t.excluded), excluded=all.filter(t=>t.excluded);
+    return groups.map(g=>'<details open><summary class="group-heading"><span>'+esc(g.name)+' <span class="rating">'+stars(g.rating)+'</span></span><button data-action="edit-group" data-id="'+esc(g.id)+'">编辑团体</button></summary>'+rows(active.filter(t=>t.groupId===g.id))+'</details>').join('')+(active.some(t=>!t.groupId)?'<div class="group-heading">未分组</div>'+rows(active.filter(t=>!t.groupId)):'')+(excluded.length?'<details class="excluded-panel"><summary>不再处理 · '+excluded.length+' 项（成果保留）</summary>'+rows(excluded)+'</details>':'')+(!all.length?'<p class="hint">'+(p.peopleConfirmed?'已确认没有人物任务。':'完成初筛后，确认需要处理的人物。')+'</p>':'');
+  }
+  function renderDetail() {
+    const p=repo.data.projects.find(p=>p.id===state.detail); if (!p) return;
+    const s=C.summary(repo.data,p), all=repo.data.tasks.filter(t=>t.projectId===p.id), links=all.flatMap(t=>t.links.map(link=>({name:repo.data.people.find(person=>person.id===t.personId).name,link})));
+    $('#detail-panel').innerHTML='<header class="detail-header"><div><p class="eyebrow">SHOOT DETAIL</p><h2 id="detail-title">'+esc(p.name)+'</h2><div class="row"><span class="muted">'+esc(p.date||'日期待补')+'</span><span class="rating">'+stars(p.rating)+'</span><span class="chip green">'+statusNames[s.status]+'</span>'+(s.reason?'<span class="chip">'+s.reason+'</span>':'')+'<button class="quiet" data-action="edit-project" data-id="'+esc(p.id)+'">编辑资料</button></div></div><button class="close" data-action="close-detail" aria-label="关闭项目详情">×</button></header><div class="detail-body"><div class="detail-main"><section class="section"><div class="section-head"><h3>数量与阶段</h3><button data-action="edit-quantities" data-id="'+esc(p.id)+'">编辑数量</button></div><div class="quantity-grid">'+[['原片总数','original'],['待筛选数','remaining'],['初筛入选','selected'],['精修导出','exported']].map(([label,key])=>'<div><small>'+label+'</small><strong>'+num(p.quantities[key])+'</strong></div>').join('')+'</div><div class="stage-list">'+[['导入 · 30%','imported'],['初筛 · 30%','selected'],['修图 · 30%','retouched'],['发布 · 10%','published']].map(([label,key])=>'<div><small>'+label+'</small><strong>'+pct(s.stages[key]*100)+'</strong></div>').join('')+'</div><div class="stage-total"><span>综合进度 · '+(s.active?'进行中':'未占用资源')+'</span><strong>'+pct(s.progress)+'</strong></div>'+(!p.selectionComplete&&p.peopleConfirmed?'<p class="warning">重新初筛中：已有成果继续计入进度，人物任务暂停编辑。</p>':'')+'<div class="row" style="margin-top:14px"><button class="primary" data-action="confirm-roster" data-id="'+esc(p.id)+'">'+(p.selectionComplete?'调整确认名单':'完成初筛并确认人物')+'</button>'+(p.selectionComplete?'<button data-action="reopen" data-id="'+esc(p.id)+'">重新初筛</button>':'')+'</div></section><section class="section"><div class="section-head"><h3>'+(p.peopleConfirmed&&!p.selectionComplete?'已有成果与人物任务':'人物与团体')+'</h3><button data-action="new-group" data-id="'+esc(p.id)+'">＋ 团体</button></div><p class="hint">有效任务：修图 '+s.retouchedCount+'/'+s.activeCount+' · 发布 '+s.publishedCount+'/'+s.activeCount+'</p>'+(state.selected.size&&p.selectionComplete?batchbar('detail'):'')+projectTasks(p)+'</section><section class="section"><div class="section-head"><h3>实际成果</h3><span class="muted" style="font-size:11px">包含不再处理的人物</span></div><div class="achievement-grid"><div><strong>'+num(p.quantities.exported)+'</strong><small>精修导出张数</small></div><div><strong>'+s.actualRetouched+'</strong><small>当前修图完成人物</small></div><div><strong>'+s.actualPublished+'</strong><small>当前发布完成人物</small></div></div>'+(links.length?'<ul class="links-list">'+links.map(l=>'<li>'+esc(l.name)+' · <a href="'+esc(l.link)+'" target="_blank" rel="noopener noreferrer">'+esc(l.link)+'</a></li>').join('')+'</ul>':'<p class="hint">尚未记录发布链接。</p>')+'</section></div><aside class="detail-side"><section class="section"><div class="section-head"><h3>资源与挂起</h3></div><label class="check-line"><input type="checkbox" data-project-toggle="ipad" '+(p.resources.ipad?'checked':'')+'>占用 iPad 筛图资源</label><label class="check-line"><input type="checkbox" data-project-toggle="pixcake" '+(p.resources.pixcake?'checked':'')+'>占用像素蛋糕修图资源</label><label class="check-line"><input type="checkbox" data-project-toggle="suspended" '+(p.suspended?'checked':'')+'>挂起项目</label>'+(p.suspended&&s.active?'<p class="warning">项目挂起，但仍占用资源。请按实际情况手动释放。</p>':'')+'<p class="hint">资源开关只控制总览进度条；进度始终计算。</p></section><section class="section"><div class="section-head"><h3>存储与留档</h3><button data-action="edit-storage" data-id="'+esc(p.id)+'">编辑</button></div>'+[['原片位置','original'],['工作位置','working'],['交付位置','delivery']].map(([label,key])=>'<small>'+label+'</small><div class="storage-value">'+esc(p.storage[key]||'尚未记录')+'</div>').join('')+'<div class="chips"><span class="chip '+(p.storage.cloudBackup?'green':'')+'">'+(p.storage.cloudBackup?'云备份已完成':'尚未云备份')+'</span><span class="chip '+(p.storage.longTerm?'green':'')+'">'+(p.storage.longTerm?'已长期留档':'未长期留档')+'</span></div></section><section class="section"><h3>拍摄资料</h3><p class="hint">场地：'+esc(p.location||'待补')+'</p><p class="hint">设备：'+esc(p.equipment||'待补')+'</p><p class="hint" style="white-space:pre-wrap">'+esc(p.notes||'暂无备注')+'</p></section></aside></div>';
+  }
+  function animatePanel(frames,duration,onDone) {
+    state.animation?.cancel(); const token=++state.animationToken, el=$('#detail-panel');
+    if (typeof el.animate!=='function') {
+      el.style.transition='opacity 150ms'; el.style.opacity=onDone?'1':'0'; let timer;
+      const frame=requestAnimationFrame(()=>{if(token!==state.animationToken)return;el.style.opacity=onDone?'0':'1';timer=setTimeout(()=>{if(token===state.animationToken){el.style.opacity='';el.style.transition='';state.animation=null;onDone?.();}},150);});
+      state.animation={cancel(){cancelAnimationFrame(frame);clearTimeout(timer);el.style.opacity='';el.style.transition='';}}; return;
+    }
+    const a=el.animate(reduced()?[{opacity:0},{opacity:1}]:frames,{duration:reduced()?1:duration,easing:'cubic-bezier(.16,1,.3,1)'}); state.animation=a;
+    a.finished.then(()=>{ if (token===state.animationToken) { state.animation=null; onDone?.(); } }).catch(()=>{});
+  }
+  function openDetail(id,origin) {
+    if (state.busy||state.modal) return; state.detailFocus=document.activeElement; state.detail=id; state.selected.clear(); state.origin=origin?.getBoundingClientRect()||null; renderDetail(); $('#detail-layer').hidden=false; $('#workspace').inert=true; const rect=$('#detail-panel').getBoundingClientRect(), from=state.origin;
+    const start=from?{transform:'translate('+(from.left+from.width/2-rect.left-rect.width/2)+'px,'+(from.top+from.height/2-rect.top-rect.height/2)+'px) scale('+from.width/rect.width+','+from.height/rect.height+')',opacity:.35,borderRadius:'11px'}:{opacity:0,transform:'translateY(12px)'};
+    animatePanel([start,{transform:'none',opacity:1,borderRadius:'18px'}],360); $('#detail-panel').querySelector('.close').focus();
+  }
+  function closeDetail() {
+    if (state.busy||state.modal) return; const el=$('#detail-panel'), rect=el.getBoundingClientRect(), card=Array.from($('#board').querySelectorAll('[data-project]')).find(el=>el.dataset.project===state.detail), target=card?.getBoundingClientRect();
+    const finish=()=>{ $('#detail-layer').hidden=true; $('#workspace').inert=false; state.detail=null; state.selected.clear(); if (card) card.focus(); else if (state.detailFocus?.isConnected) state.detailFocus.focus(); else $('#tab-projects').focus(); render(); };
+    if (reduced()) { state.animation?.cancel(); ++state.animationToken; finish(); return; }
+    const end=target?{transform:'translate('+(target.left+target.width/2-rect.left-rect.width/2)+'px,'+(target.top+target.height/2-rect.top-rect.height/2)+'px) scale('+target.width/rect.width+','+target.height/rect.height+')',opacity:0,borderRadius:'11px'}:{opacity:0};
+    animatePanel([{transform:'none',opacity:1},end],320,finish);
+  }
+  function ratingOptions(value) { return [0,1,2,3,4,5].map(n=>'<option value="'+n+'" '+(n===value?'selected':'')+'>'+stars(n)+'</option>').join(''); }
+  function projectForm(id) {
+    const p=id?repo.data.projects.find(p=>p.id===id):C.project('');
+    showDialog('<form class="dialog" id="project-form" data-id="'+esc(id||'')+'" role="dialog" aria-modal="true" aria-labelledby="form-title"><h2 id="form-title">'+(id?'编辑拍摄资料':'新建拍摄')+'</h2><p class="lead">一场活动对应一个项目，同日不同活动保持独立。</p><div class="field"><label for="project-name">拍摄名称</label><input id="project-name" name="name" required maxlength="160" value="'+esc(p.name)+'" placeholder="例如：校园秋日人像"></div><div class="field-grid"><div class="field"><label for="project-date">拍摄日期</label><input id="project-date" name="date" type="date" value="'+esc(p.date)+'"></div><div class="field"><label for="project-rating">项目评级</label><select id="project-rating" name="rating">'+ratingOptions(p.rating)+'</select></div></div><div class="field"><label for="project-location">场地</label><input id="project-location" name="location" value="'+esc(p.location)+'"></div><div class="field"><label for="project-equipment">设备</label><input id="project-equipment" name="equipment" value="'+esc(p.equipment)+'"></div><div class="field"><label for="project-notes">备注</label><textarea id="project-notes" name="notes">'+esc(p.notes)+'</textarea></div>'+errorBlock+formActions(id?'保存资料':'建立项目')+'</form>','project');
+  }
+  function quantitiesForm(id) {
+    const p=repo.data.projects.find(p=>p.id===id);
+    showDialog('<form class="dialog" id="quantities-form" data-id="'+esc(id)+'" role="dialog" aria-modal="true" aria-labelledby="form-title"><h2 id="form-title">编辑数量</h2><p class="lead">允许同时调整多个数字，只在保存时检查最终组合。未知数量留空。</p><div class="field-grid">'+[['原片总数','original'],['待筛选数','remaining'],['初筛入选数','selected'],['精修导出数','exported']].map(([label,key])=>'<div class="field"><label for="quantity-'+key+'">'+label+'</label><input id="quantity-'+key+'" name="'+key+'" type="text" inputmode="numeric" autocomplete="off" placeholder="未知" value="'+esc(p.quantities[key]??'')+'"></div>').join('')+'</div><label class="check-line"><input name="imported" type="checkbox" '+(p.imported?'checked':'')+'>原片已导入</label><p class="hint">待筛选不能超过原片；入选不能超过已浏览。已有导出超过入选时，需要确认保留真实成果。</p>'+errorBlock+formActions('一次保存全部数量')+'</form>','quantities');
+  }
+  function rosterForm(id) {
+    state.rosterPeople=[];
+    const d=repo.data,p=d.projects.find(p=>p.id===id), all=d.tasks.filter(t=>t.projectId===id), groups=d.groups.filter(g=>g.projectId===id).sort((a,b)=>b.rating-a.rating);
+    showDialog('<form class="dialog" id="roster-form" data-id="'+esc(id)+'" role="dialog" aria-modal="true" aria-labelledby="form-title"><h2 id="form-title">确认人物名单</h2><p class="lead">选用稳定人物身份。同名人员可用备注和 ID 区分；取消选择已有任务会保留成果并标为不再处理。</p><div class="row"><button type="button" data-action="roster-add-person">＋ 新人物</button><button type="button" data-action="roster-none">名单为空 / 全部不再处理</button></div><div id="roster" class="roster">'+d.people.map(person=>{ const t=all.find(t=>t.personId===person.id); return rosterRow(person,t,groups); }).join('')+'</div>'+(!d.people.length?'<p class="hint">尚未建立人物。也可以确认空名单。</p>':'')+'<p class="hint">'+(p.quantities.remaining===null?'待筛选数量未知，提交代表人工确认已经完成初筛。':'待筛选：'+num(p.quantities.remaining))+'</p>'+errorBlock+formActions('完成初筛并确认名单')+'</form>','roster');
+  }
+  function rosterRow(person,t,groups) { return '<div class="roster-item" data-person="'+esc(person.id)+'"><input type="checkbox" aria-label="纳入 '+esc(person.name)+' '+esc(person.note||person.id.slice(-8))+'" '+(t&&!t.excluded?'checked':'')+'><div>'+esc(person.name)+'<small style="display:block">'+esc(person.note||'')+' · '+esc(person.id.slice(-8))+'</small></div><select aria-label="'+esc(person.name)+' 所属团体"><option value="">未分组</option>'+groups.map(g=>'<option value="'+esc(g.id)+'" '+(t?.groupId===g.id?'selected':'')+'>'+esc(g.name)+'</option>').join('')+'</select></div>'; }
+  function personForm(roster=false) {
+    const layer=roster?'#confirm-layer':'#dialog-layer'; if (roster) { $('#dialog-layer').inert=true; state.rosterAdding=true; } else state.dialogFocus=document.activeElement;
+    $(layer).innerHTML='<form class="dialog narrow" id="person-form" data-roster="'+roster+'" role="dialog" aria-modal="true" aria-labelledby="person-title"><h2 id="person-title">建立人物身份</h2><p class="lead">人物跨项目复用。同名人员会分别保存。</p><div class="field"><label for="person-name">人物姓名</label><input id="person-name" name="name" required maxlength="160"></div><div class="field"><label for="person-note">身份备注（用于区分同名）</label><input id="person-note" name="note" placeholder="例如：摄影社 / 微信昵称"></div><div id="person-error" class="form-error" hidden></div><div class="dialog-actions"><button type="button" data-action="'+(roster?'cancel-roster-person':'cancel-dialog')+'">取消</button><button type="submit" class="primary">建立身份</button></div></form>'; $(layer).hidden=false; if (!roster) { state.modal='person'; $('#workspace').inert=true; $('#detail-panel').inert=true; } $('#person-name').focus();
+  }
+  function peopleManager() {
+    showDialog('<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="people-title"><h2 id="people-title">人物库</h2><p class="lead">改名保持 ID 和项目关联。保存每行后即时同步两个视图。</p><button data-action="new-person">＋ 新人物</button><div>'+repo.data.people.map(p=>'<form class="person-manager" data-id="'+esc(p.id)+'"><div class="person-desc"><strong>'+esc(p.name)+'</strong><small>'+esc(p.note||'无身份备注')+' · '+esc(p.id.slice(-8))+'</small><small>'+repo.data.tasks.filter(t=>t.personId===p.id).length+' 个拍摄任务</small></div><div><label class="sr-only">人物姓名</label><input name="name" required value="'+esc(p.name)+'" aria-label="'+esc(p.name)+' 姓名"><input name="note" value="'+esc(p.note)+'" aria-label="'+esc(p.name)+' 备注"></div><button type="submit">保存</button></form>').join('')+'</div>'+errorBlock+'<div class="dialog-actions"><button data-action="motion-toggle">'+(reduced()?'使用系统动画设置':'减少动态效果')+'</button><button data-action="restore-snapshot">恢复上次恢复前快照</button><button data-action="export-snapshot">导出恢复前快照</button><button data-action="cancel-dialog" class="primary">完成</button></div></section>','people');
+  }
+  function groupForm(id,projectId) { const g=id?repo.data.groups.find(g=>g.id===id):{name:'',rating:0,projectId}; showDialog('<form class="dialog narrow" id="group-form" data-id="'+esc(id||'')+'" data-project="'+esc(g.projectId)+'" role="dialog" aria-modal="true" aria-labelledby="form-title"><h2 id="form-title">'+(id?'编辑团体':'新建团体')+'</h2><p class="lead">团体评级只影响此拍摄内部排序。</p><div class="field"><label for="group-name">团体名称</label><input id="group-name" name="name" value="'+esc(g.name)+'" required></div><div class="field"><label for="group-rating">团体评级</label><select id="group-rating" name="rating">'+ratingOptions(g.rating)+'</select></div>'+errorBlock+formActions()+'</form>','group'); }
+  function storageForm(id) { const p=repo.data.projects.find(p=>p.id===id); showDialog('<form class="dialog" id="storage-form" data-id="'+esc(id)+'" role="dialog" aria-modal="true" aria-labelledby="form-title"><h2 id="form-title">存储与留档</h2><p class="lead">手动记录文件位置和备份状态。</p>'+[['原片位置','original'],['工作位置','working'],['交付位置','delivery']].map(([label,key])=>'<div class="field"><label for="storage-'+key+'">'+label+'</label><textarea id="storage-'+key+'" name="'+key+'">'+esc(p.storage[key])+'</textarea></div>').join('')+'<label class="check-line"><input type="checkbox" name="cloudBackup" '+(p.storage.cloudBackup?'checked':'')+'>云备份已完成</label><label class="check-line"><input type="checkbox" name="longTerm" '+(p.storage.longTerm?'checked':'')+'>已长期留档</label>'+errorBlock+formActions()+'</form>','storage'); }
+  function taskForm(id) { const t=repo.data.tasks.find(t=>t.id===id); if (!repo.data.projects.find(p=>p.id===t.projectId).selectionComplete) { toast('重新初筛期间暂停人物编辑',true); return; } showDialog('<form class="dialog" id="task-form" data-id="'+esc(id)+'" role="dialog" aria-modal="true" aria-labelledby="form-title"><h2 id="form-title">发布链接与人物备注</h2><p class="lead">'+esc(C.taskLabel(repo.data,t))+'；标记撤销时链接仍保留。</p><div class="field"><label for="task-links">发布链接（每行一个 http / https 地址）</label><textarea id="task-links" name="links">'+esc(t.links.join('\n'))+'</textarea></div><div class="field"><label for="task-notes">人物任务备注</label><textarea id="task-notes" name="notes">'+esc(t.notes)+'</textarea></div>'+errorBlock+formActions()+'</form>','task'); }
+  let downloadUrl=null;
+  function downloadText(text,name) { if(downloadUrl)URL.revokeObjectURL(downloadUrl);downloadUrl=URL.createObjectURL(new Blob([text],{type:'application/json;charset=utf-8'}));const notice=$('#download-notice');notice.innerHTML='<span>备份文件已准备好：</span><a id="download-link">下载备份文件</a><button data-action="dismiss-download" class="quiet" style="margin-left:10px">收起</button>';const link=$('#download-link');link.download=name;link.href=downloadUrl;notice.hidden=false;link.click(); }
+  function backup(data=repo.data,prefix='phototrace') { downloadText(JSON.stringify(C.archive(data),null,2),prefix+'-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json'); toast('已发起备份下载'); }
+  function restorePreview(candidate,source='备份文件') { const d=candidate; state.restoreCandidate=candidate; showDialog('<section class="dialog narrow" role="dialog" aria-modal="true" aria-labelledby="restore-title"><h2 id="restore-title">恢复预览</h2><p class="lead">'+esc(source)+'已通过格式、数量和关联校验。</p><div class="achievement-grid"><div><strong>'+d.projects.length+'</strong><small>拍摄项目</small></div><div><strong>'+d.people.length+'</strong><small>人物身份</small></div><div><strong>'+d.tasks.length+'</strong><small>人物任务</small></div></div><div class="notice" style="margin-top:18px">恢复将完整替换当前 '+repo.data.projects.length+' 个项目、'+repo.data.people.length+' 个人物和 '+repo.data.tasks.length+' 个任务。确认后先保存恢复前快照；失败则不替换。</div><button data-action="backup">先导出当前数据</button>'+errorBlock+'<div class="dialog-actions"><button data-action="cancel-dialog">取消</button><button data-action="apply-restore" class="primary">确认完整恢复</button></div></section>','restore'); }
+  document.addEventListener('click',async event=>{
+    const button=event.target.closest('[data-action]'); if (button) {
+      const action=button.dataset.action,id=button.dataset.id;
+      if (action==='confirm-yes'||action==='confirm-no') { resolveConfirmation(action==='confirm-yes'); return; }
+      if (state.busy) return;
+      if (action==='backup') { backup(); return; } if (action==='export-pending') { if(repo.pending) backup(repo.pending,'phototrace-unsaved'); return; } if(action==='export-raw') { downloadText(repo.raw??'','phototrace-original-archive.json'); return; }
+      if (action==='dismiss-download') {$('#download-notice').hidden=true;$('#download-notice').innerHTML='';if(downloadUrl)URL.revokeObjectURL(downloadUrl);downloadUrl=null;return;}
+      if (action==='restore') { $('#restore-file').click(); return; }
+      if (action==='retry-save') { if(repo.pending) {if(state.pendingForm?.isConnected)state.pendingForm.requestSubmit();else await submit(()=>({candidate:repo.pending}),{retry:true,success:'未保存工作数据已写入'});} return; }
+      if (action==='cancel-roster-person') { $('#confirm-layer').hidden=true; $('#confirm-layer').innerHTML=''; $('#dialog-layer').inert=false; state.rosterAdding=false; return; }
+      if (action==='cancel-dialog') { closeDialog(); return; }
+      if (action==='new-project') { if(state.modal){toast('请先保存或取消当前草稿');return;} projectForm(); return; } if(action==='edit-project') { projectForm(id); return; }
+      if (action==='edit-quantities') { quantitiesForm(id); return; } if(action==='edit-storage') { storageForm(id); return; }
+      if (action==='new-group') { groupForm(null,id); return; } if(action==='edit-group') { event.preventDefault(); groupForm(id); return; }
+      if (action==='confirm-roster') { rosterForm(id); return; } if(action==='roster-add-person') { personForm(true); return; }
+      if (action==='roster-none') { for(const el of $('#roster').querySelectorAll('input[type=checkbox]')) el.checked=false; return; }
+      if (action==='manage-people') { peopleManager(); return; } if(action==='new-person') { personForm(); return; }
+      if (action==='edit-task') { taskForm(id); return; }
+      if (action==='reopen') { await submit(()=>C.reopen(repo.data,id),{close:false,clearSelection:true,success:'已进入重新初筛，成果保留'}); return; }
+      if (action==='task-action') { await submit(()=>C.batch(repo.data,[id],button.dataset.op),{close:false,clearSelection:true}); return; }
+      if (action==='batch') { const op=$('#batch-operation-'+button.dataset.scope).value; await submit(()=>C.batch(repo.data,Array.from(state.selected),op),{close:false,clearSelection:true,success:'所选任务已一起保存'}); return; }
+      if (action==='clear-selection') { state.selected.clear(); render(); if(state.detail)renderDetail(); return; }
+      if (action==='open-project') { openDetail(id,button.closest('.card')); return; } if(action==='close-detail') { closeDetail(); return; }
+      if (action==='view-projects'||action==='view-people') { state.view=action==='view-projects'?'projects':'people'; state.selected.clear(); render(); return; }
+      if (action==='clear-filters') { state.filters={search:'',rating:'',resource:'',from:'',to:''}; for(const selector of ['#search','#rating-filter','#resource-filter','#date-from','#date-to']) $(selector).value=''; state.selected.clear(); render(); return; }
+      if (action==='motion-toggle') { const ok=await submit(()=>{const d=C.clone(repo.data);d.settings.motion=d.settings.motion==='reduced'?'system':'reduced';return {candidate:d};},{close:false}); if(ok)peopleManager(); return; }
+      if (action==='apply-restore') { const ok=await submit(()=>({candidate:state.restoreCandidate}),{restore:true,clearSelection:true,success:'存档已完整恢复'}); if(ok&&state.detail&&!repo.data.projects.some(p=>p.id===state.detail)) {state.detail=null;$('#detail-layer').hidden=true;$('#workspace').inert=false;} return; }
+      if (action==='restore-snapshot') { try {restorePreview(repo.beforeRestore(),'恢复前快照');}catch(error){showError(error.message);} return; }
+      if (action==='export-snapshot') { try {const raw=repo.snapshotRaw();if(!raw)throw new Error('没有恢复前快照');const snapshot=JSON.parse(raw);downloadText(snapshot.raw??JSON.stringify(C.archive(C.empty()),null,2),'phototrace-before-restore.json');}catch(error){showError(error.message);} return; }
+    }
+    if (event.target.closest('input,button,a,select,textarea')) return; const card=event.target.closest('[data-project]'); if(card)openDetail(card.dataset.project,card);
+  });
+  document.addEventListener('change',async event=>{
+    const target=event.target;
+    if(target.matches('[data-select-task]')) { if(target.checked)state.selected.add(target.dataset.selectTask);else state.selected.delete(target.dataset.selectTask); render(); if(state.detail)renderDetail(); return; }
+    if(target.matches('[data-project-toggle]')) { const key=target.dataset.projectToggle,value=target.checked; const ok=await submit(()=>{const d=C.clone(repo.data),p=d.projects.find(p=>p.id===state.detail);if(key==='suspended')p.suspended=value;else p.resources[key]=value;return {candidate:d};},{close:false}); if(!ok)target.checked=!value; return; }
+    if(target.id==='restore-file') { const file=target.files[0]; target.value=''; if(!file)return; try {if(file.size>50*1024*1024)throw new Error('存档超过 50 MB，无法读取');restorePreview(C.parseArchive(await file.text()),file.name);}catch(error){toast(error.message,true);if($('#dialog-error'))showError(error.message);} return; }
+    const map={'rating-filter':'rating','resource-filter':'resource','date-from':'from','date-to':'to'};if(map[target.id]) {state.filters[map[target.id]]=target.value;state.selected.clear();render();}
+  });
+  $('#search').addEventListener('input',event=>{state.filters.search=event.target.value;state.selected.clear();render();});
+  document.addEventListener('submit',async event=>{
+    event.preventDefault(); const form=event.target, fields=new FormData(form), id=form.dataset.id;
+    const submitForm=(make,options={})=>submit(make,{...options,retry:!!repo.pending,form});
+    if (form.id==='person-form') {
+      const name=String(fields.get('name')).trim(),note=String(fields.get('note')).trim(),roster=form.dataset.roster==='true'; if(!name)return;
+      if(roster) { const person=C.person(name,note); state.rosterPeople??=[]; state.rosterPeople.push(person); const p=repo.data.projects.find(p=>p.id===$('#roster-form').dataset.id),groups=repo.data.groups.filter(g=>g.projectId===p.id); $('#roster').insertAdjacentHTML('beforeend',rosterRow(person,{excluded:false},groups));$('#confirm-layer').hidden=true;$('#confirm-layer').innerHTML='';$('#dialog-layer').inert=false;state.rosterAdding=false;return; }
+      await submitForm(()=>{const d=C.clone(repo.data);d.people.push(C.person(name,note));return {candidate:d};});return;
+    }
+    if(form.id==='project-form') { await submitForm(()=>{ const d=C.clone(repo.data),p=id?d.projects.find(p=>p.id===id):C.project(''); for(const key of ['name','date','location','equipment','notes'])p[key]=String(fields.get(key)).trim();p.rating=Number(fields.get('rating'));if(!id)d.projects.push(p);return {candidate:d};});return; }
+    if(form.id==='quantities-form') { await submitForm(()=>{const q={};for(const key of ['original','remaining','selected','exported']) {const raw=String(fields.get(key)).trim();q[key]=raw===''?null:/^\d+$/.test(raw)?Number(raw):NaN;}return C.editQuantities(repo.data,id,q,fields.has('imported'));},{retry:!!repo.pending});return; }
+    if(form.id==='roster-form') { await submitForm(()=>{const d=C.clone(repo.data);for(const person of state.rosterPeople||[])if(!d.people.some(p=>p.id===person.id))d.people.push(person);const entries=Array.from($('#roster').querySelectorAll('.roster-item')).filter(el=>el.querySelector('input').checked).map(el=>({personId:el.dataset.person,groupId:el.querySelector('select').value||null}));return C.confirmPeople(d,id,entries);},{retry:!!repo.pending,clearSelection:true,success:'初筛与人物名单已一起保存'}); if(!state.modal)state.rosterPeople=[];return; }
+    if(form.id==='group-form') {await submitForm(()=>{const d=C.clone(repo.data),g=id?d.groups.find(g=>g.id===id):{id:C.uid('group'),projectId:form.dataset.project};g.name=String(fields.get('name')).trim();g.rating=Number(fields.get('rating'));if(!id)d.groups.push(g);return {candidate:d};});return;}
+    if(form.id==='storage-form') {await submitForm(()=>{const d=C.clone(repo.data),p=d.projects.find(p=>p.id===id);for(const key of ['original','working','delivery'])p.storage[key]=String(fields.get(key)).trim();for(const key of ['cloudBackup','longTerm'])p.storage[key]=fields.has(key);return {candidate:d};});return;}
+    if(form.id==='task-form') {await submitForm(()=>{const d=C.clone(repo.data),t=d.tasks.find(t=>t.id===id);if(!d.projects.find(p=>p.id===t.projectId).selectionComplete)throw new Error('重新初筛期间暂停人物编辑');t.links=String(fields.get('links')).split(/\r?\n/).map(s=>s.trim()).filter(Boolean);t.notes=String(fields.get('notes'));return {candidate:d};});return;}
+    if(form.matches('.person-manager')) {const ok=await submitForm(()=>{const d=C.clone(repo.data),p=d.people.find(p=>p.id===id);p.name=String(fields.get('name')).trim();p.note=String(fields.get('note')).trim();return {candidate:d};},{close:false});if(ok)peopleManager();}
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape') {if(state.rosterAdding){$('#confirm-layer').hidden=true;$('#confirm-layer').innerHTML='';$('#dialog-layer').inert=false;state.rosterAdding=false;}else if(state.confirm)resolveConfirmation(false);else if(state.modal)closeDialog();else if(state.detail)closeDetail();event.preventDefault();return;}
+    if(event.key==='Enter'&&event.target.matches('[data-project]')) {openDetail(event.target.dataset.project,event.target);event.preventDefault();}
+    if(event.key==='Tab'&&(state.detail||state.modal||state.confirm||state.rosterAdding)) {const root=state.confirm||state.rosterAdding?$('#confirm-layer'):state.modal?$('#dialog-layer'):$('#detail-panel');const focusable=Array.from(root.querySelectorAll('button,input,select,textarea,a[href],summary,[tabindex="0"]')).filter(el=>!el.disabled&&!el.closest('[hidden]')&&el.getClientRects().length);const first=focusable[0],last=focusable.at(-1);if(event.shiftKey&&document.activeElement===first){last?.focus();event.preventDefault();}else if(!event.shiftKey&&document.activeElement===last){first?.focus();event.preventDefault();}}
+  });
+  window.addEventListener('beforeunload',event=>{if(repo.pending||state.modal&&state.modal!=='people'&&state.modal!=='restore'){event.preventDefault();event.returnValue='';}});
+  render();
+})();
+</script>
+
+
+</body><div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div></html>

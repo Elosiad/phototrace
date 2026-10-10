@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-09",
+  "artifact": "phototrace.html",
+  "bytes": 80553,
+  "sha256": "e60f6d2d75579f639338fde86a58e087eb9421c6f7837c65a8b5bf198350422b",
+  "unitTestsPassed": 32,
+  "realFileRoundtrip": true,
+  "recordCounts": {
+    "projects": 6,
+    "groups": 2,
+    "people": 4,
+    "tasks": 6
+  },
+  "directFileNavigationVerified": false,
+  "narrowViewportVerified": false
+}

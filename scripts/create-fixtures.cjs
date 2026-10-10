@@ -1,0 +1,26 @@
+// Synthetic acceptance records only. Never loaded automatically into the user's workspace.
+const fs=require('node:fs');
+const path=require('node:path');
+const {load,fourPersonFixture,plain}=require('../tests/helpers.cjs');
+const {C}=load();
+const data=fourPersonFixture(C),main=data.projects[0];
+main.name='校园秋日人像 · 四人';main.rating=5;
+main.location='校园草坪（模拟记录）';main.equipment='相机 + 50mm';main.notes='PLAN.md 77.5% 验收场景，全部为模拟数据。';
+main.storage={original:'D:\\Photos\\2026-10-08\\RAW',working:'D:\\Photos\\2026-10-08\\Working',delivery:'D:\\Photos\\2026-10-08\\Export',cloudBackup:true,longTerm:false};
+data.people[0].name='小林';data.people[0].note='摄影社';data.people[1].name='小林';data.people[1].note='舞蹈社';data.people[2].name='阿晨';data.people[3].name='小夏';
+data.groups.push({id:C.uid('group'),projectId:main.id,name:'摄影社',rating:5},{id:C.uid('group'),projectId:main.id,name:'舞蹈社',rating:3});
+data.tasks[0].groupId=data.groups[0].id;data.tasks[1].groupId=data.groups[1].id;
+const pending=C.project('社团迎新 · 公共初筛','2026-10-09');pending.rating=4;pending.imported=true;pending.resources.ipad=true;pending.quantities={original:2300,remaining:1380,selected:120,exported:null};data.projects.push(pending);
+const done=C.project('海边日落 · 已交付','2026-10-02');done.rating=3;done.imported=true;done.selectionComplete=true;done.peopleConfirmed=true;done.quantities={original:480,remaining:0,selected:36,exported:18};done.storage.longTerm=true;data.projects.push(done);
+const t=C.task(done.id,data.people[0].id);t.retouched=true;t.published=true;t.links=['https://example.com/phototrace/sunset'];data.tasks.push(t);
+const retouched=C.project('舞台排练 · 等待发布','2026-10-07');retouched.rating=4;retouched.imported=true;retouched.selectionComplete=true;retouched.peopleConfirmed=true;retouched.quantities={original:720,remaining:0,selected:45,exported:24};data.projects.push(retouched);const rt=C.task(retouched.id,data.people[1].id);rt.retouched=true;data.tasks.push(rt);
+const empty=C.project('建筑随拍 · 无人物','2026-10-03');empty.imported=true;empty.selectionComplete=true;empty.peopleConfirmed=true;empty.quantities={original:90,remaining:0,selected:0,exported:0};data.projects.push(empty);
+const suspended=C.project('城市夜景 · 暂缓','2026-10-05');suspended.rating=2;suspended.imported=true;suspended.suspended=true;suspended.resources.pixcake=true;suspended.quantities={original:360,remaining:180,selected:40,exported:null};data.projects.push(suspended);
+C.validate(data);
+const dir=path.join(__dirname,'..','tests','fixtures');fs.mkdirSync(dir,{recursive:true});
+const archive=C.archive(data,'2026-10-09T12:00:00.000Z');
+fs.writeFileSync(path.join(dir,'acceptance.json'),JSON.stringify(archive,null,2));
+fs.writeFileSync(path.join(dir,'corrupt.json'),'{"format":"PhotoTrace", malformed');
+fs.writeFileSync(path.join(dir,'unknown-version.json'),JSON.stringify({...plain(archive),version:999},null,2));
+const broken=plain(archive);broken.data.tasks[0].personId='missing-person';fs.writeFileSync(path.join(dir,'broken-association.json'),JSON.stringify(broken,null,2));
+console.log('Created synthetic acceptance fixture: '+data.projects.length+' projects, '+data.people.length+' people, '+data.tasks.length+' tasks');

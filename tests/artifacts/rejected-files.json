@@ -1,0 +1,17 @@
+[
+  {
+    "file": "corrupt.json",
+    "message": "文件不是有效 JSON，无法恢复",
+    "previewOpened": false
+  },
+  {
+    "file": "unknown-version.json",
+    "message": "不支持存档版本 999；当前仅支持版本 1",
+    "previewOpened": false
+  },
+  {
+    "file": "broken-association.json",
+    "message": "人物任务关联断裂：task-42665deb-e6fb-49a5-b580-a0fd3f9972b5",
+    "previewOpened": false
+  }
+]

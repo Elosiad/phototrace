@@ -1,0 +1,261 @@
+{
+  "format": "PhotoTrace",
+  "version": 1,
+  "exportedAt": "2026-10-10T01:08:31.102Z",
+  "data": {
+    "projects": [
+      {
+        "id": "project-15a616fb-1bdc-4e7e-822e-0c5914bb8e3b",
+        "name": "1.2",
+        "date": "2026-10-10",
+        "rating": 0,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "rosterPrepared": true,
+        "suspended": false,
+        "quantities": {
+          "original": 100,
+          "remaining": 0,
+          "selected": 5,
+          "exported": null
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": true
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "",
+        "equipment": "",
+        "tags": {
+          "location": [],
+          "equipment": []
+        },
+        "notes": ""
+      },
+      {
+        "id": "project-a3123345-7827-4dc3-93ae-9ac40562e65e",
+        "name": "1.3",
+        "date": "2026-10-10",
+        "rating": 0,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "rosterPrepared": true,
+        "suspended": false,
+        "quantities": {
+          "original": 100,
+          "remaining": 0,
+          "selected": 20,
+          "exported": null
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": true
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "",
+        "equipment": "",
+        "tags": {
+          "location": [],
+          "equipment": []
+        },
+        "notes": ""
+      },
+      {
+        "id": "project-e7e39a6c-4967-47ac-afd6-f7a51f241cbe",
+        "name": "2.3",
+        "date": "2026-10-10",
+        "rating": 0,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "rosterPrepared": true,
+        "suspended": false,
+        "quantities": {
+          "original": 100,
+          "remaining": 0,
+          "selected": 20,
+          "exported": null
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": true
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "",
+        "equipment": "",
+        "tags": {
+          "location": [],
+          "equipment": []
+        },
+        "notes": ""
+      },
+      {
+        "id": "project-c253de9c-9ec5-4f36-8ab9-f6296a195afc",
+        "name": "1.5",
+        "date": "2026-10-10",
+        "rating": 0,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "rosterPrepared": true,
+        "suspended": false,
+        "quantities": {
+          "original": 100,
+          "remaining": 0,
+          "selected": 20,
+          "exported": null
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": true
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "",
+        "equipment": "",
+        "tags": {
+          "location": [],
+          "equipment": []
+        },
+        "notes": ""
+      }
+    ],
+    "groups": [
+      {
+        "id": "group-47243285-dd28-4dec-9044-70838b5bd558",
+        "projectId": "project-15a616fb-1bdc-4e7e-822e-0c5914bb8e3b",
+        "name": "摄影社",
+        "rating": 0
+      },
+      {
+        "id": "group-47752345-ed21-4410-b603-2f13e883d361",
+        "projectId": "project-a3123345-7827-4dc3-93ae-9ac40562e65e",
+        "name": "摄影社",
+        "rating": 0
+      },
+      {
+        "id": "group-e9cff270-c3d1-41cd-ac9e-a05ddac6ee7c",
+        "projectId": "project-e7e39a6c-4967-47ac-afd6-f7a51f241cbe",
+        "name": "摄影社",
+        "rating": 0
+      },
+      {
+        "id": "group-38420e61-29b5-4a2a-980e-7ccc4160df14",
+        "projectId": "project-c253de9c-9ec5-4f36-8ab9-f6296a195afc",
+        "name": "摄影社",
+        "rating": 0
+      },
+      {
+        "id": "group-70bd9e4c-5303-4c5e-9cb6-8f24ba30b109",
+        "projectId": "project-15a616fb-1bdc-4e7e-822e-0c5914bb8e3b",
+        "name": "新的社团",
+        "rating": 0
+      },
+      {
+        "id": "group-ff290928-3381-42b2-8484-98467c93790d",
+        "projectId": "project-a3123345-7827-4dc3-93ae-9ac40562e65e",
+        "name": "新的社团",
+        "rating": 0
+      }
+    ],
+    "people": [
+      {
+        "id": "person-69084ec5-50fb-4318-859d-841da16afd8e",
+        "name": "富田",
+        "note": "反馈 2 模拟人物"
+      },
+      {
+        "id": "person-d2865c14-9f38-45b1-baf4-a718d7367d6d",
+        "name": "无名",
+        "note": "反馈 2 模拟人物"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "task-d15b75f2-af76-43a4-81f9-10874af196ca",
+        "projectId": "project-15a616fb-1bdc-4e7e-822e-0c5914bb8e3b",
+        "personId": "person-69084ec5-50fb-4318-859d-841da16afd8e",
+        "groupId": "group-70bd9e4c-5303-4c5e-9cb6-8f24ba30b109",
+        "retouched": false,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      },
+      {
+        "id": "task-3cf223ef-77d0-4030-9eba-8ba4fd07106e",
+        "projectId": "project-a3123345-7827-4dc3-93ae-9ac40562e65e",
+        "personId": "person-69084ec5-50fb-4318-859d-841da16afd8e",
+        "groupId": "group-47752345-ed21-4410-b603-2f13e883d361",
+        "retouched": false,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      },
+      {
+        "id": "task-71c3a9e1-a4e3-421d-9929-aab5061a8d4b",
+        "projectId": "project-a3123345-7827-4dc3-93ae-9ac40562e65e",
+        "personId": "person-d2865c14-9f38-45b1-baf4-a718d7367d6d",
+        "groupId": "group-ff290928-3381-42b2-8484-98467c93790d",
+        "retouched": true,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      },
+      {
+        "id": "task-5bef1338-b095-441d-904c-d8bc7d7b077f",
+        "projectId": "project-e7e39a6c-4967-47ac-afd6-f7a51f241cbe",
+        "personId": "person-69084ec5-50fb-4318-859d-841da16afd8e",
+        "groupId": "group-e9cff270-c3d1-41cd-ac9e-a05ddac6ee7c",
+        "retouched": true,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      },
+      {
+        "id": "task-37a86ddc-d951-4f5b-91a2-11ab4797290d",
+        "projectId": "project-c253de9c-9ec5-4f36-8ab9-f6296a195afc",
+        "personId": "person-69084ec5-50fb-4318-859d-841da16afd8e",
+        "groupId": "group-38420e61-29b5-4a2a-980e-7ccc4160df14",
+        "retouched": true,
+        "published": true,
+        "excluded": false,
+        "links": [
+          "https://example.com/phototrace/futian"
+        ],
+        "notes": ""
+      }
+    ],
+    "settings": {
+      "motion": "system"
+    }
+  }
+}

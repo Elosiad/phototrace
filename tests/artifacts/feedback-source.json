@@ -1,0 +1,140 @@
+{
+  "format": "PhotoTrace",
+  "version": 1,
+  "exportedAt": "2026-10-09T15:43:44.891Z",
+  "data": {
+    "projects": [
+      {
+        "id": "project-09116a6e-3844-491f-a939-bdf8aa0f5dae",
+        "name": "反馈验收 · 已筛旧片",
+        "date": "",
+        "rating": 0,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "rosterPrepared": true,
+        "suspended": false,
+        "quantities": {
+          "original": null,
+          "remaining": null,
+          "selected": 120,
+          "exported": null
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": true
+        },
+        "storage": {
+          "original": "D:/模拟照片/旧拍摄",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": true,
+          "longTerm": false
+        },
+        "location": "校园",
+        "equipment": "Sony A7、35mm",
+        "tags": {
+          "location": [
+            "校园"
+          ],
+          "equipment": [
+            "Sony A7",
+            "35mm"
+          ]
+        },
+        "notes": ""
+      },
+      {
+        "id": "project-dbf61bf7-61f0-469f-80e1-51dbdd61c725",
+        "name": "反馈验收 · 正在初筛",
+        "date": "",
+        "rating": 0,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "rosterPrepared": true,
+        "suspended": false,
+        "quantities": {
+          "original": 100,
+          "remaining": 0,
+          "selected": 20,
+          "exported": null
+        },
+        "resources": {
+          "ipad": true,
+          "pixcake": false
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "棚拍",
+        "equipment": "Sony A7",
+        "tags": {
+          "location": [
+            "棚拍"
+          ],
+          "equipment": [
+            "Sony A7"
+          ]
+        },
+        "notes": ""
+      }
+    ],
+    "groups": [
+      {
+        "id": "group-bc36a3d9-c6cc-42eb-a295-9fa174ed2bf8",
+        "projectId": "project-dbf61bf7-61f0-469f-80e1-51dbdd61c725",
+        "name": "反馈验收团体",
+        "rating": 0
+      }
+    ],
+    "people": [
+      {
+        "id": "person-3114d6bc-4e56-4091-88a6-168f74d1e1fa",
+        "name": "验收小林",
+        "note": "模拟人物"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "task-e1cae0f1-90aa-42ce-84b5-9ab1e033f6c2",
+        "projectId": "project-dbf61bf7-61f0-469f-80e1-51dbdd61c725",
+        "personId": "person-3114d6bc-4e56-4091-88a6-168f74d1e1fa",
+        "groupId": "group-bc36a3d9-c6cc-42eb-a295-9fa174ed2bf8",
+        "retouched": true,
+        "published": true,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      },
+      {
+        "id": "task-bbf1650e-5814-49c3-a850-b443ca899863",
+        "projectId": "project-09116a6e-3844-491f-a939-bdf8aa0f5dae",
+        "personId": "person-3114d6bc-4e56-4091-88a6-168f74d1e1fa",
+        "groupId": null,
+        "retouched": true,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      }
+    ],
+    "settings": {
+      "motion": "system",
+      "tagHistory": {
+        "location": [
+          "校园",
+          "棚拍"
+        ],
+        "equipment": [
+          "35mm",
+          "Sony A7"
+        ]
+      }
+    }
+  }
+}

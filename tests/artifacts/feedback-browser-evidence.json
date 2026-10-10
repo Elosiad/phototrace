@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-09",
+  "checks": [
+    {
+      "scenario": "人物视图按场地筛选",
+      "visiblePeople": 0,
+      "expected": 0
+    },
+    {
+      "scenario": "场地和设备组合筛选",
+      "visiblePeople": 0,
+      "expected": 0
+    },
+    {
+      "scenario": "命中人物所属拍摄标签",
+      "visiblePeople": 1,
+      "expected": 1
+    },
+    {
+      "scenario": "点击项目标签快速筛选",
+      "visibleProjects": 1,
+      "expected": 1
+    }
+  ],
+  "roundtrip": {
+    "equal": true,
+    "projects": 2,
+    "people": 1,
+    "tasks": 2
+  }
+}

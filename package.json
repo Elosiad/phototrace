@@ -1,0 +1,7 @@
+{
+  "name": "phototrace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline single-file photography workflow",
+  "scripts": { "test": "node --test tests/*.test.cjs" }
+}

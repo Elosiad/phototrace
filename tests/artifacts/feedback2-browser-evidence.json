@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-10",
+  "checks": [
+    {
+      "scenario": "详情页直接编辑并整组保存",
+      "values": [
+        {
+          "field": "original",
+          "value": "100"
+        },
+        {
+          "field": "remaining",
+          "value": "90"
+        },
+        {
+          "field": "selected",
+          "value": "5"
+        },
+        {
+          "field": "exported",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "scenario": "重新初筛项目归入暂停区",
+      "paused": 1,
+      "retouch": 1
+    },
+    {
+      "scenario": "过滤后点开人物仍展示全部项目",
+      "filteredCards": 1,
+      "detailTasks": 4
+    },
+    {
+      "scenario": "只选一个项目时合并卡片为部分勾选",
+      "ariaChecked": "mixed"
+    },
+    {
+      "scenario": "数量保存失败后界面重绘与最新输入重试",
+      "preserved": "13",
+      "saved": "14"
+    },
+    {
+      "scenario": "关闭详情后重试最新数量草稿",
+      "draftVisible": false,
+      "value": "14"
+    }
+  ],
+  "roundtrip": {
+    "equal": true,
+    "projects": 4,
+    "people": 2,
+    "tasks": 5,
+    "groups": 6
+  }
+}

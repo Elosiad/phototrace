@@ -1,0 +1,300 @@
+{
+  "format": "PhotoTrace",
+  "version": 1,
+  "exportedAt": "2026-10-09T12:00:00.000Z",
+  "data": {
+    "projects": [
+      {
+        "id": "project-79533ea2-443a-4868-8c77-83617e87eeeb",
+        "name": "校园秋日人像 · 四人",
+        "date": "2026-10-08",
+        "rating": 5,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "suspended": false,
+        "quantities": {
+          "original": 100,
+          "remaining": 0,
+          "selected": 20,
+          "exported": 12
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": true
+        },
+        "storage": {
+          "original": "D:\\Photos\\2026-10-08\\RAW",
+          "working": "D:\\Photos\\2026-10-08\\Working",
+          "delivery": "D:\\Photos\\2026-10-08\\Export",
+          "cloudBackup": true,
+          "longTerm": false
+        },
+        "location": "校园草坪（模拟记录）",
+        "equipment": "相机 + 50mm",
+        "notes": "PLAN.md 77.5% 验收场景，全部为模拟数据。"
+      },
+      {
+        "id": "project-3634fc5e-a2e4-4bec-a63f-bf2cf25ca752",
+        "name": "社团迎新 · 公共初筛",
+        "date": "2026-10-09",
+        "rating": 4,
+        "imported": true,
+        "selectionComplete": false,
+        "peopleConfirmed": false,
+        "suspended": false,
+        "quantities": {
+          "original": 2300,
+          "remaining": 1380,
+          "selected": 120,
+          "exported": null
+        },
+        "resources": {
+          "ipad": true,
+          "pixcake": false
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "",
+        "equipment": "",
+        "notes": ""
+      },
+      {
+        "id": "project-83f5928e-69b3-4d80-854a-6b1d4cf263d2",
+        "name": "海边日落 · 已交付",
+        "date": "2026-10-02",
+        "rating": 3,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "suspended": false,
+        "quantities": {
+          "original": 480,
+          "remaining": 0,
+          "selected": 36,
+          "exported": 18
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": false
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": true
+        },
+        "location": "",
+        "equipment": "",
+        "notes": ""
+      },
+      {
+        "id": "project-303a7e68-0590-4327-b2a0-a1f7eaed81ea",
+        "name": "舞台排练 · 等待发布",
+        "date": "2026-10-07",
+        "rating": 4,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "suspended": false,
+        "quantities": {
+          "original": 720,
+          "remaining": 0,
+          "selected": 45,
+          "exported": 24
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": false
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "",
+        "equipment": "",
+        "notes": ""
+      },
+      {
+        "id": "project-ccd5e865-ff3e-49dd-a526-24ee9f419fbd",
+        "name": "建筑随拍 · 无人物",
+        "date": "2026-10-03",
+        "rating": 0,
+        "imported": true,
+        "selectionComplete": true,
+        "peopleConfirmed": true,
+        "suspended": false,
+        "quantities": {
+          "original": 90,
+          "remaining": 0,
+          "selected": 0,
+          "exported": 0
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": false
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "",
+        "equipment": "",
+        "notes": ""
+      },
+      {
+        "id": "project-34b78f09-f430-4bb1-9a15-8f0386eda576",
+        "name": "城市夜景 · 暂缓",
+        "date": "2026-10-05",
+        "rating": 2,
+        "imported": true,
+        "selectionComplete": false,
+        "peopleConfirmed": false,
+        "suspended": true,
+        "quantities": {
+          "original": 360,
+          "remaining": 180,
+          "selected": 40,
+          "exported": null
+        },
+        "resources": {
+          "ipad": false,
+          "pixcake": true
+        },
+        "storage": {
+          "original": "",
+          "working": "",
+          "delivery": "",
+          "cloudBackup": false,
+          "longTerm": false
+        },
+        "location": "",
+        "equipment": "",
+        "notes": ""
+      }
+    ],
+    "groups": [
+      {
+        "id": "group-960d2bc0-492d-4fc6-8abc-88d59819f58e",
+        "projectId": "project-79533ea2-443a-4868-8c77-83617e87eeeb",
+        "name": "摄影社",
+        "rating": 5
+      },
+      {
+        "id": "group-91c41b01-b514-4314-8416-c7ef44c69e59",
+        "projectId": "project-79533ea2-443a-4868-8c77-83617e87eeeb",
+        "name": "舞蹈社",
+        "rating": 3
+      }
+    ],
+    "people": [
+      {
+        "id": "person-660edaae-8809-43eb-9918-47b081e373a3",
+        "name": "小林",
+        "note": "摄影社"
+      },
+      {
+        "id": "person-81e3ead8-05ec-4648-9d42-93446566c533",
+        "name": "小林",
+        "note": "舞蹈社"
+      },
+      {
+        "id": "person-e053e7d3-5700-4d53-b505-7a1a37fddd7e",
+        "name": "阿晨",
+        "note": "测试身份"
+      },
+      {
+        "id": "person-b941ecb2-8c79-4459-9ffd-7f771591679a",
+        "name": "小夏",
+        "note": "测试身份"
+      }
+    ],
+    "tasks": [
+      {
+        "id": "task-42665deb-e6fb-49a5-b580-a0fd3f9972b5",
+        "projectId": "project-79533ea2-443a-4868-8c77-83617e87eeeb",
+        "personId": "missing-person",
+        "groupId": "group-960d2bc0-492d-4fc6-8abc-88d59819f58e",
+        "retouched": true,
+        "published": true,
+        "excluded": false,
+        "links": [
+          "https://example.com/phototrace/1"
+        ],
+        "notes": ""
+      },
+      {
+        "id": "task-d57116a1-dfd6-4bea-820d-099a3c8b420a",
+        "projectId": "project-79533ea2-443a-4868-8c77-83617e87eeeb",
+        "personId": "person-81e3ead8-05ec-4648-9d42-93446566c533",
+        "groupId": "group-91c41b01-b514-4314-8416-c7ef44c69e59",
+        "retouched": true,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      },
+      {
+        "id": "task-77bfba4b-45f5-49d6-92d1-abf707c6f2b9",
+        "projectId": "project-79533ea2-443a-4868-8c77-83617e87eeeb",
+        "personId": "person-e053e7d3-5700-4d53-b505-7a1a37fddd7e",
+        "groupId": null,
+        "retouched": false,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      },
+      {
+        "id": "task-56f6b2f3-8ff8-4f70-ac7f-9e4651147293",
+        "projectId": "project-79533ea2-443a-4868-8c77-83617e87eeeb",
+        "personId": "person-b941ecb2-8c79-4459-9ffd-7f771591679a",
+        "groupId": null,
+        "retouched": false,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      },
+      {
+        "id": "task-8160bee5-d7f0-4fbc-89e8-606ac23004a6",
+        "projectId": "project-83f5928e-69b3-4d80-854a-6b1d4cf263d2",
+        "personId": "person-660edaae-8809-43eb-9918-47b081e373a3",
+        "groupId": null,
+        "retouched": true,
+        "published": true,
+        "excluded": false,
+        "links": [
+          "https://example.com/phototrace/sunset"
+        ],
+        "notes": ""
+      },
+      {
+        "id": "task-1393d626-e023-4bda-b883-bca92a36e190",
+        "projectId": "project-303a7e68-0590-4327-b2a0-a1f7eaed81ea",
+        "personId": "person-81e3ead8-05ec-4648-9d42-93446566c533",
+        "groupId": null,
+        "retouched": true,
+        "published": false,
+        "excluded": false,
+        "links": [],
+        "notes": ""
+      }
+    ],
+    "settings": {
+      "motion": "system"
+    }
+  }
+}
